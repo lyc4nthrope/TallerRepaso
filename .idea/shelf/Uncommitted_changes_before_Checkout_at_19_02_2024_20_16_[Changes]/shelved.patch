@@ -1,0 +1,119 @@
+Index: src/main/java/co/edu/uniquindio/demo/demo/ControlProductoPerecedero.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package co.edu.uniquindio.demo.demo;\r\n\r\nimport javafx.animation.AnimationTimer;\r\nimport javafx.collections.FXCollections;\r\nimport javafx.collections.ObservableList;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.control.cell.PropertyValueFactory;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.lang.reflect.Array;\r\nimport java.net.URL;\r\nimport java.util.ArrayList;\r\nimport java.util.ResourceBundle;\r\nimport java.util.concurrent.atomic.AtomicInteger;\r\n\r\npublic class ControlProductoPerecedero implements Initializable {\r\n    ArrayList<ProductoPerecedero> listaProductoPerecedero = CrudPerecedero.leerProductoPerecedero();\r\n\r\n    @FXML\r\n    private TableColumn<ProductoPerecedero, String> jurCodigo;\r\n\r\n    @FXML\r\n    private TableColumn<ProductoPerecedero, String> jurNombre;\r\n\r\n    @FXML\r\n    private TableColumn<ProductoPerecedero, String> jurDescripcion;\r\n\r\n    @FXML\r\n    private TableColumn<ProductoPerecedero, String> jurValorU;\r\n\r\n    @FXML\r\n    private TableColumn<ProductoPerecedero, String> jurCantidad;\r\n\r\n    @FXML\r\n    private TableColumn<ProductoPerecedero, String> jurFechaVencimiento;\r\n\r\n    @FXML\r\n    private TableView<ProductoPerecedero> tablaProductosPerecederos;\r\n\r\n    ObservableList<ProductoPerecedero> listaProductosPerecederosObservable = FXCollections.observableList(listaProductoPerecedero);\r\n\r\n    @Override\r\n    public void initialize(URL url, ResourceBundle resourceBundle) {\r\n        jurCodigo.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>(\"codigo\"));\r\n        jurNombre.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>(\"nombre\"));\r\n        jurDescripcion.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>(\"descripcion\"));\r\n        jurValorU.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>(\"valorUnitario\"));\r\n        jurCantidad.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>(\"Cantidad\"));\r\n        jurFechaVencimiento.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>(\"fechaVencimiento\"));\r\n        listaProductoPerecedero = CrudPerecedero.leerProductoPerecedero();\r\n        tablaProductosPerecederos.setItems(listaProductosPerecederosObservable);\r\n    }\r\n\r\n    @FXML\r\n    private TextField textCodigo;\r\n\r\n    @FXML\r\n    private TextField textNombre;\r\n\r\n    @FXML\r\n    private TextField textDescripcion;\r\n\r\n    @FXML\r\n    private TextField textValorU;\r\n\r\n    @FXML\r\n    private TextField textCantidad;\r\n\r\n    @FXML\r\n    private TextField textFechaVencimiento;\r\n\r\n    public void agregarProductoPerecedero(ActionEvent event) {\r\n        if (hayAlgo()) {\r\n            String codigo = textCodigo.getText();\r\n            String nombre = textNombre.getText();\r\n            String descripcion = textDescripcion.getText();\r\n            double valorU = Double.parseDouble(textValorU.getText());\r\n            int cantidad = Integer.parseInt(textCantidad.getText());\r\n            String fechaVencimiento = textFechaVencimiento.getText();\r\n            vaciarCampos();\r\n            ProductoPerecedero productoPerecedero = new ProductoPerecedero(codigo, nombre, descripcion, valorU, cantidad, fechaVencimiento);\r\n            if (CrudPerecedero.existeId(productoPerecedero.getCodigo())){\r\n                Alert alert = new Alert(Alert.AlertType.ERROR);\r\n                alert.setHeaderText(null);\r\n                alert.setTitle(\"Error\");\r\n                alert.setContentText(\"Datos ya ingresados\");\r\n                alert.showAndWait();\r\n            }else {\r\n                CrudPerecedero.crearProductoPere(productoPerecedero);\r\n                actualizar();\r\n            }\r\n        }else {\r\n            Alert alert = new Alert(Alert.AlertType.ERROR);\r\n            alert.setHeaderText(null);\r\n            alert.setTitle(\"Error\");\r\n            alert.setContentText(\"Llene todo\");\r\n            alert.showAndWait();\r\n        }\r\n    }\r\n\r\n    public void modificacion(ActionEvent event) throws IOException{\r\n        ProductoPerecedero productoPerecedero = this.tablaProductosPerecederos.getSelectionModel().getSelectedItem();\r\n        if (productoPerecedero == null){\r\n            Alert alert = new Alert(Alert.AlertType.ERROR);\r\n            alert.setHeaderText(null);\r\n            alert.setTitle(\"Error\");\r\n            alert.setContentText(\"Debes seleccionar una persona\");\r\n            alert.showAndWait();\r\n        }else{\r\n            if (hayAlgo()){\r\n                String codigo = textCodigo.getText();\r\n                String nombre = textNombre.getText();\r\n                String descripcion = textDescripcion.getText();\r\n                double valorU = Double.parseDouble(textValorU.getText());\r\n                int cantidad = Integer.parseInt(textCantidad.getText());\r\n                String fechaVencimiento = textFechaVencimiento.getText();\r\n                vaciarCampos();\r\n                ProductoPerecedero productoPerecederoAux = new ProductoPerecedero(codigo, nombre, descripcion, valorU, cantidad, fechaVencimiento);\r\n                boolean existNatural = listaProductoPerecedero.contains(productoPerecederoAux);\r\n                if (existNatural){\r\n                    Alert alert = new Alert(Alert.AlertType.ERROR);\r\n                    alert.setHeaderText(null);\r\n                    alert.setTitle(\"Error\");\r\n                    alert.setContentText(\"Datos iguales a otro Cliente\");\r\n                    alert.showAndWait();\r\n                }else{\r\n                    CrudPerecedero.actualizarProductoPere(productoPerecederoAux, productoPerecedero.getCodigo());\r\n                    actualizar();\r\n                    vaciarCampos();\r\n                    Alert alert = new Alert(Alert.AlertType.INFORMATION);\r\n                    alert.setHeaderText(null);\r\n                    alert.setTitle(\"Info\");\r\n                    alert.setContentText(\"Modificacion hecha\");\r\n                    alert.showAndWait();\r\n                }\r\n            }else{\r\n                Alert alert = new Alert(Alert.AlertType.ERROR);\r\n                alert.setHeaderText(null);\r\n                alert.setTitle(\"Error\");\r\n                alert.setContentText(\"Llene todo\");\r\n                alert.showAndWait();\r\n            }\r\n        }\r\n    }\r\n\r\n    public void actualizar(){\r\n        listaProductoPerecedero=CrudPerecedero.leerProductoPerecedero();\r\n        listaProductosPerecederosObservable = FXCollections.observableList(listaProductoPerecedero);\r\n        tablaProductosPerecederos.setItems(listaProductosPerecederosObservable);\r\n    }\r\n    public boolean hayAlgo(){\r\n        boolean hayAlgo=false;\r\n        if (!textCodigo.getText().isEmpty() && !textNombre.getText().isEmpty() && !textDescripcion.getText().isEmpty()\r\n                && !textValorU.getText().isEmpty() && !textCantidad.getText().isEmpty() && !textFechaVencimiento.getText().isEmpty()){\r\n            hayAlgo = true;\r\n        }\r\n        return hayAlgo;\r\n    }\r\n\r\n    public  void vaciarCampos(){\r\n        textCodigo.setText(\"\");textNombre.setText(\"\");textDescripcion.setText(\"\");\r\n        textValorU.setText(\"\");textCantidad.setText(\"\");textFechaVencimiento.setText(\"\");\r\n    }\r\n\r\n    void switchScena1(ActionEvent event) throws IOException {\r\n        Parent root = FXMLLoader.load(getClass().getResource(\"Scena1.fxml\"));\r\n        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        Scene scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    public  void eliminarProductoPerecedero(){\r\n        ProductoPerecedero productoPerecedero = this.tablaProductosPerecederos.getSelectionModel().getSelectedItem();\r\n        if (productoPerecedero == null){\r\n            Alert alert = new Alert(Alert.AlertType.ERROR);\r\n            alert.setHeaderText(null);\r\n            alert.setTitle(\"Error\");\r\n            alert.setContentText(\"Debes seleccionar una persona\");\r\n            alert.showAndWait();\r\n        }else {\r\n            actualizar();\r\n            vaciarCampos();\r\n        }\r\n    }\r\n\r\n    public void volver(ActionEvent event) throws IOException {\r\n        Parent root = FXMLLoader.load(getClass().getResource(\"Scena1.fxml\"));\r\n        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();\r\n        Scene scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    public void seleccionar(javafx.scene.input.MouseEvent mouseEvent) {\r\n        ProductoPerecedero productoPerecedero= this.tablaProductosPerecederos.getSelectionModel().getSelectedItem();\r\n        if(productoPerecedero!=null){\r\n            this.textCodigo.setText(productoPerecedero.getCodigo());\r\n            this.textNombre.setText(productoPerecedero.getNombre());\r\n            this.textDescripcion.setText(productoPerecedero.getDescripcion());\r\n            this.textValorU.setText(productoPerecedero.getValorUnitario());\r\n            this.textCantidad.setText(productoPerecedero.getCantidadExistencia());\r\n            this.textFechaVencimiento.setText(productoPerecedero.getFechaVencimiento());\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/co/edu/uniquindio/demo/demo/ControlProductoPerecedero.java b/src/main/java/co/edu/uniquindio/demo/demo/ControlProductoPerecedero.java
+--- a/src/main/java/co/edu/uniquindio/demo/demo/ControlProductoPerecedero.java	(revision 2a97d97cc9a3ad168577e9aa0e80ae29bf27c4cf)
++++ b/src/main/java/co/edu/uniquindio/demo/demo/ControlProductoPerecedero.java	(date 1708391121602)
+@@ -53,7 +53,7 @@
+         jurNombre.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("nombre"));
+         jurDescripcion.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("descripcion"));
+         jurValorU.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("valorUnitario"));
+-        jurCantidad.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("Cantidad"));
++        jurCantidad.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("cantidadExistencia"));
+         jurFechaVencimiento.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("fechaVencimiento"));
+         listaProductoPerecedero = CrudPerecedero.leerProductoPerecedero();
+         tablaProductosPerecederos.setItems(listaProductosPerecederosObservable);
+@@ -82,7 +82,7 @@
+             String codigo = textCodigo.getText();
+             String nombre = textNombre.getText();
+             String descripcion = textDescripcion.getText();
+-            double valorU = Double.parseDouble(textValorU.getText());
++            Float valorU = Float.parseFloat(textValorU.getText());
+             int cantidad = Integer.parseInt(textCantidad.getText());
+             String fechaVencimiento = textFechaVencimiento.getText();
+             vaciarCampos();
+@@ -119,7 +119,7 @@
+                 String codigo = textCodigo.getText();
+                 String nombre = textNombre.getText();
+                 String descripcion = textDescripcion.getText();
+-                double valorU = Double.parseDouble(textValorU.getText());
++                Float valorU = Float.parseFloat(textValorU.getText());
+                 int cantidad = Integer.parseInt(textCantidad.getText());
+                 String fechaVencimiento = textFechaVencimiento.getText();
+                 vaciarCampos();
+@@ -206,8 +206,8 @@
+             this.textCodigo.setText(productoPerecedero.getCodigo());
+             this.textNombre.setText(productoPerecedero.getNombre());
+             this.textDescripcion.setText(productoPerecedero.getDescripcion());
+-            this.textValorU.setText(productoPerecedero.getValorUnitario());
+-            this.textCantidad.setText(productoPerecedero.getCantidadExistencia());
++            this.textValorU.setText(String.valueOf(productoPerecedero.getValorUnitario()));
++            this.textCantidad.setText(String.valueOf(productoPerecedero.getCantidadExistencia()));
+             this.textFechaVencimiento.setText(productoPerecedero.getFechaVencimiento());
+         }
+     }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"EntryPointsManager\">\r\n    <writeAnnotations>\r\n      <writeAnnotation name=\"javafx.fxml.FXML\" />\r\n    </writeAnnotations>\r\n  </component>\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n    <option name=\"workspaceImportForciblyTurnedOn\" value=\"true\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"17\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 2a97d97cc9a3ad168577e9aa0e80ae29bf27c4cf)
++++ b/.idea/misc.xml	(date 1708390919110)
+@@ -12,7 +12,6 @@
+         <option value="$PROJECT_DIR$/pom.xml" />
+       </list>
+     </option>
+-    <option name="workspaceImportForciblyTurnedOn" value="true" />
+   </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+Index: src/main/java/co/edu/uniquindio/demo/demo/ProductoPerecedero.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package co.edu.uniquindio.demo.demo;\r\n\r\nimport java.time.LocalDate;\r\n\r\npublic class ProductoPerecedero extends Producto{\r\n\r\n    private String fechaVencimiento;\r\n\r\n    public ProductoPerecedero(String codigo, String nombre, String descripcion, Float valorUnitario, int cantidadExistencia, String fechaVencimiento) {\r\n        super(codigo, nombre, descripcion, valorUnitario, cantidadExistencia);\r\n        this.fechaVencimiento = fechaVencimiento;\r\n    }\r\n\r\n    public String getFechaVencimiento() {\r\n        return fechaVencimiento;\r\n    }\r\n\r\n    public void setFechaVencimiento(String fechaVencimiento) {\r\n        this.fechaVencimiento = fechaVencimiento;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/co/edu/uniquindio/demo/demo/ProductoPerecedero.java b/src/main/java/co/edu/uniquindio/demo/demo/ProductoPerecedero.java
+--- a/src/main/java/co/edu/uniquindio/demo/demo/ProductoPerecedero.java	(revision 2a97d97cc9a3ad168577e9aa0e80ae29bf27c4cf)
++++ b/src/main/java/co/edu/uniquindio/demo/demo/ProductoPerecedero.java	(date 1708391702678)
+@@ -4,18 +4,18 @@
+ 
+ public class ProductoPerecedero extends Producto{
+ 
+-    private String fechaVencimiento;
++    private LocalDate fechaVencimiento;
+ 
+-    public ProductoPerecedero(String codigo, String nombre, String descripcion, Float valorUnitario, int cantidadExistencia, String fechaVencimiento) {
++    public ProductoPerecedero(String codigo, String nombre, String descripcion, Float valorUnitario, int cantidadExistencia, LocalDate fechaVencimiento) {
+         super(codigo, nombre, descripcion, valorUnitario, cantidadExistencia);
+         this.fechaVencimiento = fechaVencimiento;
+     }
+ 
+-    public String getFechaVencimiento() {
++    public LocalDate getFechaVencimiento() {
+         return fechaVencimiento;
+     }
+ 
+-    public void setFechaVencimiento(String fechaVencimiento) {
++    public void setFechaVencimiento(LocalDate fechaVencimiento) {
+         this.fechaVencimiento = fechaVencimiento;
+     }
+ }
+Index: src/main/java/co/edu/uniquindio/demo/demo/ScenaControl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package co.edu.uniquindio.demo.demo;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.ComboBox;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\n\r\npublic class ScenaControl {\r\n    private Stage stage;\r\n    private Scene scene;\r\n    private Parent root;\r\n\r\n    public void switchScena1(ActionEvent event) throws IOException {\r\n        root = FXMLLoader.load(getClass().getResource(\"Scena1.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    public void switchScenaClientes(ActionEvent event) throws IOException{\r\n        root = FXMLLoader.load(getClass().getResource(\"ScenaClientes.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void switchScenaClienteNatural(ActionEvent event) throws IOException{\r\n        root = FXMLLoader.load(getClass().getResource(\"ScenaClienteNatural.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void switchScenaClienteJuridico(ActionEvent event) throws IOException{\r\n        root = FXMLLoader.load(getClass().getResource(\"ScenaClienteJuridico.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void switchScenaProductos(ActionEvent event) throws IOException{\r\n        root = FXMLLoader.load(getClass().getResource(\"ScenaProductos.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void switchScenaProductoEnvasado(ActionEvent event) throws IOException {\r\n        root = FXMLLoader.load(getClass().getResource(\"ScenaProductoEnvasado.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void switchScenaProductoPerecedero(ActionEvent event) throws IOException {\r\n        root = FXMLLoader.load(getClass().getResource(\"ScenaProductoPerecedero.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void switchScenaProductoRefrigerado(ActionEvent event) throws IOException {\r\n        root = FXMLLoader.load(getClass().getResource(\"ScenaProductoRefrigerado.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    @FXML\r\n    private ComboBox<String> comboxPais;\r\n\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/co/edu/uniquindio/demo/demo/ScenaControl.java b/src/main/java/co/edu/uniquindio/demo/demo/ScenaControl.java
+--- a/src/main/java/co/edu/uniquindio/demo/demo/ScenaControl.java	(revision 2a97d97cc9a3ad168577e9aa0e80ae29bf27c4cf)
++++ b/src/main/java/co/edu/uniquindio/demo/demo/ScenaControl.java	(date 1708390937064)
+@@ -75,9 +75,6 @@
+         stage.show();
+     }
+ 
+-    @FXML
+-    private ComboBox<String> comboxPais;
+-
+ }
+ 
+ 
