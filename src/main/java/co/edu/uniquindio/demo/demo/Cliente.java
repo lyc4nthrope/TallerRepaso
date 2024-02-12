@@ -51,7 +51,9 @@ public class Cliente {
         return telefono;
     }
 
-    public void setTelefono(String telefono)
+    public void setTelefono(String telefono){
+
+    }
         //..
 
     // Métodos CRUD
