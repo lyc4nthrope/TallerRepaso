@@ -51,9 +51,8 @@ public class Cliente {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+    public void setTelefono(String telefono)
+        //..
 
     // Métodos CRUD
     public void crearCliente() {
