@@ -58,7 +58,7 @@ public class Cliente {
 
     // Métodos CRUD
     public void crearCliente() {
-        // Implementación para crear un cliente en la base de datos
+
     }
 
     public void leerCliente(String identificacion) {
