@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class PersonaNatural extends Cliente{
     private String email;
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
 
-    public PersonaNatural(String nombre, String apellidos, String identificacion, String direccion, String telefono, String email, LocalDate fechaNacimiento) {
+    public PersonaNatural(String nombre, String apellidos, String identificacion, String direccion, String telefono, String email, String fechaNacimiento) {
         super(nombre, apellidos, identificacion, direccion, telefono);
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
@@ -20,11 +20,11 @@ public class PersonaNatural extends Cliente{
         this.email = email;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 }
