@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class CrudEnvasado {
 
-    static String archivoEnvasado = "CRUD_ClienteEnvasado.txt";
+    static String archivoEnvasado = "CRUD_ProductoEnvasado.txt";
 
     public void crearProductoEnvasado(ProductoEnvasado productoEnvasado) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivoEnvasado, true))) {

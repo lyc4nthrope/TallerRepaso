@@ -4,21 +4,18 @@ import java.time.LocalDate;
 
 public class ProductoPerecedero extends Producto{
 
-    private LocalDate fechaVencimiento;
+    private String fechaVencimiento;
 
-    public LocalDate getFechaVencimiento() {
+    public ProductoPerecedero(String codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, String fechaVencimiento) {
+        super(codigo, nombre, descripcion, valorUnitario, cantidadExistencia);
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public String getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(LocalDate fechaVencimiento) {
+    public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
-
-    public ProductoPerecedero(int codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, LocalDate fechaVencimiento) {
-        super(codigo, nombre, descripcion, valorUnitario, cantidadExistencia);
-        this.fechaVencimiento = fechaVencimiento;
-
-
-    }
-
 }
