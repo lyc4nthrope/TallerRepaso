@@ -56,21 +56,6 @@ public class Producto {
         this.cantidadExistencia = cantidadExistencia;
     }
 
-    // Métodos CRUD
-    public void crearProducto() {
-        // Implementación para crear un producto en la base de datos
-    }
 
-    public void leerProducto(int codigo) {
-        // Implementación para leer un producto de la base de datos por código
-    }
-
-    public void actualizarProducto() {
-        // Implementación para actualizar un producto en la base de datos
-    }
-
-    public void eliminarProducto() {
-        // Implementación para eliminar un producto de la base de datos
-    }
 }
 

@@ -3,22 +3,22 @@ package co.edu.uniquindio.demo.demo;
 import java.time.LocalDate;
 
 public class ProductoEnvasado extends Producto{
-    private LocalDate fechaEnvasado;
+    private String fechaEnvasado;
     private int pesoEnvase;
    private Pais paisOrigen;
 
-    public ProductoEnvasado(int codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, LocalDate fechaEnvasado, int pesoEnvase, Pais paisOrigen) {
+    public ProductoEnvasado(int codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, String fechaEnvasado, int pesoEnvase, Pais paisOrigen) {
         super(codigo, nombre, descripcion, valorUnitario, cantidadExistencia);
         this.fechaEnvasado = fechaEnvasado;
         this.pesoEnvase = pesoEnvase;
         this.paisOrigen = paisOrigen;
     }
 
-    public LocalDate getFechaEnvasado() {
+    public String getFechaEnvasado() {
         return fechaEnvasado;
     }
 
-    public void setFechaEnvasado(LocalDate fechaEnvasado) {
+    public void setFechaEnvasado(String fechaEnvasado) {
         this.fechaEnvasado = fechaEnvasado;
     }
 
