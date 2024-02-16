@@ -7,7 +7,7 @@ public class CrudJuridico {
 
     static String archivoJuridico = "CRUD_ClienteJuridico.txt";
 
-    public void crearClientesJuridicos(PersonaJuridica personaJuridica) {
+    public void crearClientesJuridico(PersonaJuridica personaJuridica) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivoJuridico, true))) {
             writer.write(personaJuridica.getNombre() + ";"
                     + personaJuridica.getApellidos() + ";" + personaJuridica.getIdentificacion()

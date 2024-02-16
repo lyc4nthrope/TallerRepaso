@@ -8,7 +8,7 @@ public class ProductoEnvasado extends Producto{
 
     private String paisOrigen;
 
-    public ProductoEnvasado(int codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, String fechaEnvasado, int pesoEnvase, String paisOrigen) {
+    public ProductoEnvasado(String codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, String fechaEnvasado, int pesoEnvase, String paisOrigen) {
         super(codigo, nombre, descripcion, valorUnitario, cantidadExistencia);
         this.fechaEnvasado = fechaEnvasado;
         this.pesoEnvase = pesoEnvase;
