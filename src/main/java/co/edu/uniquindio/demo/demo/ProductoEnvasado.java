@@ -5,9 +5,10 @@ import java.time.LocalDate;
 public class ProductoEnvasado extends Producto{
     private String fechaEnvasado;
     private int pesoEnvase;
-   private Pais paisOrigen;
 
-    public ProductoEnvasado(int codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, String fechaEnvasado, int pesoEnvase, Pais paisOrigen) {
+    private String paisOrigen;
+
+    public ProductoEnvasado(int codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, String fechaEnvasado, int pesoEnvase, String paisOrigen) {
         super(codigo, nombre, descripcion, valorUnitario, cantidadExistencia);
         this.fechaEnvasado = fechaEnvasado;
         this.pesoEnvase = pesoEnvase;
@@ -30,11 +31,11 @@ public class ProductoEnvasado extends Producto{
         this.pesoEnvase = pesoEnvase;
     }
 
-    public Pais getPaisOrigen() {
+    public String getPaisOrigen() {
         return paisOrigen;
     }
 
-    public void setPaisOrigen(Pais paisOrigen) {
+    public void setPaisOrigen(String paisOrigen) {
         this.paisOrigen = paisOrigen;
     }
 }
