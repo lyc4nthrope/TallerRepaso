@@ -1,12 +1,16 @@
 package co.edu.uniquindio.demo.demo;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ScenaControl {
     private Stage stage;
@@ -71,4 +75,9 @@ public class ScenaControl {
         stage.show();
     }
 
+    @FXML
+    private ComboBox<String> comboxPais;
+
 }
+
+
