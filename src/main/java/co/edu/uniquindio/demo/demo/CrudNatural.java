@@ -1,7 +1,6 @@
 package co.edu.uniquindio.demo.demo;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CrudNatural {
@@ -41,6 +40,8 @@ public class CrudNatural {
 
         return  cliPersonaNaturals;
     }
+
+
 // crear un buscador
     public void actualizarClienteNatu(String identificacion, PersonaNatural  personaNatural) {
         int posicion= 0;//buscadorPersonaNatural(identificacion);
