@@ -1,5 +1,6 @@
 package co.edu.uniquindio.demo.demo;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
