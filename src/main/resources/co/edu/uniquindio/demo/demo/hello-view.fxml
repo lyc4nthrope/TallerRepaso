@@ -1,180 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane layoutX="14.0" layoutY="402.0" prefHeight="170.0" prefWidth="285.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="79.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="206.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <TableView fx:id="listaJuridicos" layoutX="14.0" layoutY="12.0" prefHeight="344.0" prefWidth="451.0">
+        <columns>
+          <TableColumn fx:id="jurNombre" prefWidth="75.0" text="Nombre" />
+          <TableColumn fx:id="jurApellido" prefWidth="75.0" text="Apellido" />
+            <TableColumn fx:id="jurID" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="jurDireccion" prefWidth="75.0" text="Direccion" />
+            <TableColumn fx:id="jurTelefono" prefWidth="75.0" text="Telefono" />
+            <TableColumn fx:id="jurNit" prefWidth="75.0" text="Nit" />
+        </columns>
+      </TableView>
+      <AnchorPane layoutX="465.0" layoutY="12.0" prefHeight="232.0" prefWidth="226.0">
          <children>
-            <Label text="Nombre" GridPane.rowIndex="1" />
-            <Label text="Apellido" GridPane.rowIndex="2" />
-            <Label text="Identificacion" GridPane.rowIndex="3" />
-            <Label text="Direccion" GridPane.rowIndex="4" />
-            <Label text="Telefono" GridPane.rowIndex="5" />
-            <Label text="Nit" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="Cliente Juridico" GridPane.columnIndex="1" />
+            <Text layoutX="12.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
+            <Text layoutX="12.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido" />
+            <Text layoutX="12.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nit" />
+            <Text layoutX="12.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" />
+            <Text layoutX="12.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direccion" />
+            <Text layoutX="12.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+            <TextField fx:id="textNombre" layoutX="63.0" layoutY="15.0" />
+            <TextField fx:id="textApellido" layoutX="63.0" layoutY="45.0" />
+            <TextField fx:id="textID" layoutX="63.0" layoutY="75.0" />
+            <TextField fx:id="textDireccion" layoutX="63.0" layoutY="106.0" />
+            <TextField fx:id="textTelefono" layoutX="63.0" layoutY="138.0" />
+            <TextField fx:id="textNit" layoutX="63.0" layoutY="170.0" />
          </children>
-      </GridPane>
-      <GridPane layoutX="369.0" layoutY="419.0" prefHeight="170.0" prefWidth="285.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="112.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="173.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label text="Nombre" GridPane.rowIndex="1" />
-            <Label text="Apellido" GridPane.rowIndex="2" />
-            <Label text="Identificacion" GridPane.rowIndex="3" />
-            <Label text="Direccion" GridPane.rowIndex="4" />
-            <Label text="Telefono" GridPane.rowIndex="5" />
-            <Label text="Email" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="Fecha de nacimiento" GridPane.rowIndex="7" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label text="Cliente Natural" GridPane.columnIndex="1" />
-         </children>
-      </GridPane>
-      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="170.0" prefWidth="329.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="79.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="206.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label text="Codigo" GridPane.rowIndex="1" />
-            <Label text="Nombre" GridPane.rowIndex="2" />
-            <Label text="Descripcion" GridPane.rowIndex="3" />
-            <Label text="Valor Unidad" GridPane.rowIndex="4" />
-            <Label text="Cantidad en Existencia" GridPane.rowIndex="5" />
-            <Label text="Fecha de Envasado" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Producto Envasado" GridPane.columnIndex="1" />
-            <Label text="Peso Envase" GridPane.rowIndex="7" />
-            <Label text="Pais Origen" GridPane.rowIndex="8" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6" />
-         </children>
-      </GridPane>
-      <GridPane layoutX="14.0" layoutY="193.0" prefHeight="170.0" prefWidth="329.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="79.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="206.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label text="Codigo" GridPane.rowIndex="1" />
-            <Label text="Nombre" GridPane.rowIndex="2" />
-            <Label text="Descripcion" GridPane.rowIndex="3" />
-            <Label text="Valor Unidad" GridPane.rowIndex="4" />
-            <Label text="Cantidad en Existencia" GridPane.rowIndex="5" />
-            <Label text="Fecha Vencimiento" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Producto Perecedero" GridPane.columnIndex="1" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6" />
-         </children>
-      </GridPane>
-      <GridPane layoutX="369.0" layoutY="14.0" prefHeight="170.0" prefWidth="386.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="184.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="160.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label text="Codigo" GridPane.rowIndex="1" />
-            <Label text="Nombre" GridPane.rowIndex="2" />
-            <Label text="Descripcion" GridPane.rowIndex="3" />
-            <Label text="Valor Unidad" GridPane.rowIndex="4" />
-            <Label text="Cantidad en Existencia" GridPane.rowIndex="5" />
-            <Label text="Codigo de aprovacion" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Producto Refrigerado" GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="Temperatura Recomendada" GridPane.rowIndex="7" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
-         </children>
-      </GridPane>
-      <Button layoutX="671.0" layoutY="238.0" mnemonicParsing="false" text="Guardar" />
-      <Button layoutX="671.0" layoutY="286.0" mnemonicParsing="false" text="Actualizar" />
-      <Button layoutX="671.0" layoutY="261.0" mnemonicParsing="false" text="Eliminar" />
+      </AnchorPane>
    </children>
 </AnchorPane>
