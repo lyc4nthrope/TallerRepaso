@@ -51,5 +51,6 @@
          </children>
       </GridPane>
       <Button layoutX="473.0" layoutY="210.0" mnemonicParsing="false" text="Añadir" />
+      <Button layoutX="473.0" layoutY="242.0" mnemonicParsing="false" text="Regresar" />
    </children>
 </AnchorPane>
