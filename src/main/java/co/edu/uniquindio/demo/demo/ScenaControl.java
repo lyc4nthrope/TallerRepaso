@@ -9,7 +9,7 @@ public class ScenaControl {
     private Parent root;
 
     public void switchScena1(ActionEvent inicio){
-        Parent root = FMXLLoader.Load(getClass().getResource("Scena1.fxml"))
+        root = FMXLLoader.Load(getClass().getResource("Scena1.fxml"))
     }
 
     public void switchScenaClientes(ActionEvent inicio){
