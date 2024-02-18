@@ -93,7 +93,6 @@ public class CrudJuridico {
                         crearClientesJuridicos.get(i).getTelefono()+";"+crearClientesJuridicos.get(i).getNit()+";\n");
 
             }
-
         }catch (IOException e){
             e.printStackTrace();
 

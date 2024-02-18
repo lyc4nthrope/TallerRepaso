@@ -35,9 +35,12 @@ public class CrudNatural {
                 cliPersonaNaturals.add(new PersonaNatural(nombre,apellidos,identificacion,direccion,telefono,email,fechaNacimiento));
             }
         }catch (IOException e){
-            e.printStackTrace();
+            try{
+                BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true));
+            }catch (IOException ex){
+                throw new RuntimeException(ex);
+            }
         }
-
         return  cliPersonaNaturals;
     }
 
@@ -46,8 +49,10 @@ public class CrudNatural {
     public void actualizarClienteNatu(String identificacion, PersonaNatural  personaNatural) {
         int posicion= 0;//buscadorPersonaNatural(identificacion);
         ArrayList<PersonaNatural> cliPersonaNaturals = leerClienteNatu();
-        if (cliPersonaNaturals.get(posicion).getIdentificacion().equals(identificacion)){
-            cliPersonaNaturals.set(posicion,personaNatural);
+        for (int i = 0; i <cliPersonaNaturals.size() ; i++) {
+            if (cliPersonaNaturals.get(posicion).getIdentificacion().equals(identificacion)){
+                cliPersonaNaturals.set(posicion,personaNatural);
+            }
         }
         crearClientesNatus(cliPersonaNaturals);
     }
@@ -58,8 +63,10 @@ public class CrudNatural {
         //update from db_amacen TablaNatural (nombre,apellido,....) values (nombre,apellido,....) where identificacion = "identificacion"
         int posicion= 0;//buscadorPersonaNatural(identificacion);
         ArrayList<PersonaNatural> cliPersonaNaturals = leerClienteNatu();
-        if (cliPersonaNaturals.get(posicion).getIdentificacion().equals(identificacion)){
-            cliPersonaNaturals.remove(posicion);
+        for (int i = 0; i <cliPersonaNaturals.size() ; i++) {
+            if (cliPersonaNaturals.get(posicion).getIdentificacion().equals(identificacion)){
+                cliPersonaNaturals.remove(posicion);
+            }
         }
         crearClientesNatus(cliPersonaNaturals);
     }
@@ -75,7 +82,5 @@ public class CrudNatural {
         }catch (IOException e){
             e.printStackTrace();
         }
-
     }
-
 }

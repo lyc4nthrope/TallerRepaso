@@ -1,5 +1,7 @@
 package co.edu.uniquindio.demo.demo;
 
+import java.util.ArrayList;
+
 public class PersonaJuridica extends Cliente {
     private String nit;
 
@@ -15,4 +17,7 @@ public class PersonaJuridica extends Cliente {
     public void setNit(String nit) {
         this.nit = nit;
     }
+
 }
+
+
