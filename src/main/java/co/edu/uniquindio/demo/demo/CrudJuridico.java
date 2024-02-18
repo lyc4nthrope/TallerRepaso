@@ -58,7 +58,6 @@ public class CrudJuridico {
         }
 
         crearClientesJuridicos(cliPersonaJuridicos);
-
     }
 
     public static void eliminarClienteJuri(String identificacion) {
@@ -86,7 +85,6 @@ public class CrudJuridico {
                         crearClientesJuridicos.get(i).getTelefono()+";"+crearClientesJuridicos.get(i).getNit()+";\n");
 
             }
-
         }catch (IOException e){
             e.printStackTrace();
 
