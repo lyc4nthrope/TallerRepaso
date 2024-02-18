@@ -106,11 +106,12 @@ public class ControlPersonaJuridica implements Initializable {
                     String nit = textNit.getText();
                     vaciarCampos();
                     PersonaJuridica clienteJuridicoAux = new PersonaJuridica(nombre,apellido,identificacion,direccion,telefono,nit);
-                    if (listaClientesJuridicos.contains(clienteJuridicoAux)){
+                    boolean existJuridico = listaClientesJuridicos.contains(clienteJuridicoAux);
+                    if (existJuridico){
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setHeaderText(null);
                         alert.setTitle("Error");
-                        alert.setContentText("Cliente ya registrado");
+                        alert.setContentText("Datos iguales a otro Cliente");
                         alert.showAndWait();
                     }else {
                         CrudJuridico.actualizarClienteJuri(clienteJuridicoAux,persona.getIdentificacion());
