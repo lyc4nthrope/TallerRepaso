@@ -9,15 +9,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -62,21 +59,91 @@ public class ControlPersonaJuridica implements Initializable {
     }
 
     public void agregarPersonaJuridica(ActionEvent event){
-        String nombre = textNombre.getText();
-        String apellido = textApellido.getText();
-        String identificacion = textID.getText();
-        String direccion = textDireccion.getText();
-        String telefono = textTelefono.getText();
-        String nit = textNit.getText();
-        textNombre.setText("");textApellido.setText("");textID.setText("");
-        textDireccion.setText("");textTelefono.setText("");textNit.setText("");
-        PersonaJuridica clienteJuridico = new PersonaJuridica(nombre,apellido,identificacion,direccion,telefono,nit);
-        CrudJuridico.crearClientesJuridico(clienteJuridico);
+        if(hayAlgo()){
+            String nombre = textNombre.getText();
+            String apellido = textApellido.getText();
+            String identificacion = textID.getText();
+            String direccion = textDireccion.getText();
+            String telefono = textTelefono.getText();
+            String nit = textNit.getText();
+            vaciarCampos();
+            PersonaJuridica clienteJuridico = new PersonaJuridica(nombre,apellido,identificacion,direccion,telefono,nit);
+            if(CrudJuridico.existeId(clienteJuridico.getIdentificacion())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Datos ya ingresados");
+                alert.showAndWait();
+            }else{
+                CrudJuridico.crearClientesJuridico(clienteJuridico);
+                actualizar();
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Llene todo");
+            alert.showAndWait();
+        }
 
-      actualizar();
     }
 
+    public void modificacion(ActionEvent event) throws IOException {
+            PersonaJuridica persona = this.tablaJuridicos.getSelectionModel().getSelectedItem();
+            if (persona == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Debes seleccionar una persona");
+                alert.showAndWait();
+            }else {
+                if(hayAlgo()){
+                    String nombre = textNombre.getText();
+                    String apellido = textApellido.getText();
+                    String identificacion = textID.getText();
+                    String direccion = textDireccion.getText();
+                    String telefono = textTelefono.getText();
+                    String nit = textNit.getText();
+                    vaciarCampos();
+                    PersonaJuridica clienteJuridicoAux = new PersonaJuridica(nombre,apellido,identificacion,direccion,telefono,nit);
+                    if (listaClientesJuridicos.contains(clienteJuridicoAux)){
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText(null);
+                        alert.setTitle("Error");
+                        alert.setContentText("Cliente ya registrado");
+                        alert.showAndWait();
+                    }else {
+                        CrudJuridico.actualizarClienteJuri(clienteJuridicoAux,persona.getIdentificacion());
+                        actualizar();
+                        vaciarCampos();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText(null);
+                        alert.setTitle("Info");
+                        alert.setContentText("Modificacion hecha");
+                        alert.showAndWait();
+                    }
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("Llene todo");
+                    alert.showAndWait();
+                }
+            }
+    }
 
+    public boolean hayAlgo(){
+        boolean hayAlgo=false;
+        if (!textApellido.getText().isEmpty() && !textNombre.getText().isEmpty() && !textID.getText().isEmpty()
+                && !textTelefono.getText().isEmpty() && !textNit.getText().isEmpty() && !textDireccion.getText().isEmpty()){
+        hayAlgo = true;
+        }
+        return hayAlgo;
+    }
+     public  void vaciarCampos(){
+         textNombre.setText("");textApellido.setText("");textID.setText("");
+         textDireccion.setText("");textTelefono.setText("");textNit.setText("");
+     }
     @FXML
     private TextField textApellido;
 
@@ -103,19 +170,21 @@ public class ControlPersonaJuridica implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public void volver(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ScenaClienteJuridico.fxml"));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     public void eliminarClienteJuridico(){
-        String id = JOptionPane.showInputDialog("Ingrese la identificacion de la persona a eliminar");
-        CrudJuridico.eliminarClienteJuri(id);
-
-        actualizar();
+        PersonaJuridica persona = this.tablaJuridicos.getSelectionModel().getSelectedItem();
+        if (persona == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Debes seleccionar una persona");
+            alert.showAndWait();
+        }else {
+            CrudJuridico.eliminarClienteJuri(persona.getIdentificacion());
+            actualizar();
+            vaciarCampos();
+        }
     }
 
     public void actualizar(){
@@ -124,5 +193,25 @@ public class ControlPersonaJuridica implements Initializable {
         tablaJuridicos.setItems(listaClientesJuridicosObservable);
     }
 
+    public void volver(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Scena1.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    public void seleccionar(javafx.scene.input.MouseEvent mouseEvent) {
+        PersonaJuridica persona= this.tablaJuridicos.getSelectionModel().getSelectedItem();
+        if(persona!=null){
+            this.textNombre.setText(persona.getNombre());
+            this.textApellido.setText(persona.getApellidos());
+            this.textDireccion.setText(persona.getDireccion());
+            this.textTelefono.setText(persona.getTelefono());
+            this.textNit.setText(persona.getNit());
+            this.textID.setText(persona.getIdentificacion());
+        }
+    }
 }
 

@@ -1,5 +1,7 @@
 package co.edu.uniquindio.demo.demo;
 
+import javafx.scene.control.Alert;
+
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -9,15 +11,22 @@ public class CrudJuridico {
     static String archivoJuridico = "CRUD_ClienteJuridico.txt";
 
     public static void crearClientesJuridico(PersonaJuridica personaJuridica) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivoJuridico, true))) {
-            writer.write(personaJuridica.getNombre() + ";"
-                    + personaJuridica.getApellidos() + ";" + personaJuridica.getIdentificacion()
-                    + ";" + personaJuridica.getDireccion() + ";" + personaJuridica.getTelefono() + ";" + personaJuridica.getNit() + ";\n");
+        if (existeId(personaJuridica.getIdentificacion())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Cliente ya registrado");
+            alert.showAndWait();
+        }else {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivoJuridico, true))) {
+                writer.write(personaJuridica.getNombre() + ";"
+                        + personaJuridica.getApellidos() + ";" + personaJuridica.getIdentificacion()
+                        + ";" + personaJuridica.getDireccion() + ";" + personaJuridica.getTelefono() + ";" + personaJuridica.getNit() + ";\n");
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
     public static ArrayList<PersonaJuridica> leerClienteJuridico() {
@@ -48,7 +57,7 @@ public class CrudJuridico {
     }
 
     // crear un buscador
-    public static void actualizarClienteJuri(String identificacion, PersonaJuridica personaJuridica) {
+    public static void actualizarClienteJuri(PersonaJuridica personaJuridica, String identificacion) {
         //buscadorPersonaNatural(identificacion);
         ArrayList<PersonaJuridica> cliPersonaJuridicos = leerClienteJuridico();
         for (int i = 0; i < cliPersonaJuridicos.size(); i++) {
@@ -56,9 +65,7 @@ public class CrudJuridico {
                 cliPersonaJuridicos.set(i,personaJuridica);
             }
         }
-
         crearClientesJuridicos(cliPersonaJuridicos);
-
     }
 
     public static void eliminarClienteJuri(String identificacion) {
@@ -93,4 +100,14 @@ public class CrudJuridico {
         }
     }
 
+    public static boolean existeId(String id){
+        boolean existe = false;
+        ArrayList<PersonaJuridica> listaClientesJuridicos = leerClienteJuridico();
+        for (int i = 0; i < listaClientesJuridicos.size()&&!existe; i++) {
+            if (id.equals(listaClientesJuridicos.get(i).getIdentificacion())){
+                existe=true;
+            }
+        }
+        return existe;
+    }
 }
