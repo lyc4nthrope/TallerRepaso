@@ -14,8 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
@@ -122,59 +123,6 @@ public class ControlPersonaJuridica implements Initializable {
         listaClientesJuridicosObservable = FXCollections.observableList(listaClientesJuridicos);
         tablaJuridicos.setItems(listaClientesJuridicosObservable);
     }
-
-    public void modificarJuridico(ActionEvent event) throws IOException {
-        String id = JOptionPane.showInputDialog("Ingrese la ID de la persona a modificar");
-        boolean existe=false;
-        int indice=0;
-        for (int i = 0; i < listaClientesJuridicos.size() && !existe; i++) {
-            if(id.equalsIgnoreCase(listaClientesJuridicos.get(i).getIdentificacion())){
-                existe=true;
-                indice=i;
-            }
-        }
-        if (existe){
-            Parent root = FXMLLoader.load(getClass().getResource("ModificarJuridico.fxml"));
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            txtNombreMod.setText(listaClientesJuridicos.get(indice).getNombre());
-            txtApellidoMod.setText(listaClientesJuridicos.get(indice).getApellidos());
-            idModificador.setText(listaClientesJuridicos.get(indice).getIdentificacion());
-            txtDireccionMod.setText(listaClientesJuridicos.get(indice).getDireccion());
-            txtTelefonoMod.setText(listaClientesJuridicos.get(indice).getTelefono());
-            txtNITMod.setText(listaClientesJuridicos.get(indice).getNit());
-        }
-            if(event.getSource() == btnGuardarMod) {
-                String nombreMod = txtNombreMod.getText();
-                String apellidoMod = txtApellidoMod.getText();
-                String direccionMod = txtDireccionMod.getText();
-                String telefonoMod = txtTelefonoMod.getText();
-                String nitMod = txtNITMod.getText();
-                PersonaJuridica clienteJuridico = new PersonaJuridica(nombreMod, apellidoMod, id, direccionMod, telefonoMod, nitMod);
-                CrudJuridico.actualizarClienteJuri(id, clienteJuridico);
-            }
-    }
-    @FXML
-    private Button btnGuardarMod;
-    @FXML
-    private TextField txtApellidoMod;
-
-    @FXML
-    private TextField txtDireccionMod;
-
-    @FXML
-    private TextField txtNITMod;
-
-    @FXML
-    private TextField txtNombreMod;
-
-    @FXML
-    private TextField txtTelefonoMod;
-    @FXML
-    private Label idModificador;
-
 
 }
 
