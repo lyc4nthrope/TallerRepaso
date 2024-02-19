@@ -76,8 +76,9 @@ public class ScenaControl {
     }
 
     @FXML
-    private ComboBox<String> comboxPais;
-
+    public void salir(){
+        System.exit(0);
+    }
 }
 
 

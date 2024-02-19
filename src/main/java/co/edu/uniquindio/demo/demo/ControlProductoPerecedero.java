@@ -1,6 +1,6 @@
 package co.edu.uniquindio.demo.demo;
 
-import javafx.animation.AnimationTimer;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,11 +15,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 public class ControlProductoPerecedero implements Initializable {
     ArrayList<ProductoPerecedero> listaProductoPerecedero = CrudPerecedero.leerProductoPerecedero();
@@ -206,9 +205,17 @@ public class ControlProductoPerecedero implements Initializable {
             this.textCodigo.setText(productoPerecedero.getCodigo());
             this.textNombre.setText(productoPerecedero.getNombre());
             this.textDescripcion.setText(productoPerecedero.getDescripcion());
-            this.textValorU.setText(productoPerecedero.getValorUnitario());
-            this.textCantidad.setText(productoPerecedero.getCantidadExistencia());
+            this.textValorU.setText(toString(productoPerecedero.getValorUnitario()));
+            this.textCantidad.setText(toString(productoPerecedero.getCantidadExistencia()));
             this.textFechaVencimiento.setText(productoPerecedero.getFechaVencimiento());
         }
+    }
+
+    private String toString(double valorUnitario) {
+        return null;
+    }
+
+    private String toString(int cantidadExistencia){
+        return null;
     }
 }

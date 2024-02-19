@@ -1,6 +1,6 @@
 package co.edu.uniquindio.demo.demo;
 
-import java.util.ArrayList;
+
 
 public class PersonaJuridica extends Cliente {
     private String nit;

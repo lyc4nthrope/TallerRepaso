@@ -1,6 +1,6 @@
 package co.edu.uniquindio.demo.demo;
 
-import javafx.animation.AnimationTimer;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,11 +15,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 public class ControlPersonaNatural implements Initializable {
 
@@ -31,7 +31,7 @@ public class ControlPersonaNatural implements Initializable {
     private TableColumn<PersonaNatural, String> jurApellido;
 
     @FXML
-    private TableColumn<PersonaNatural, String> jurId;
+    private TableColumn<PersonaNatural, String> jurID;
 
     @FXML
     private TableColumn<PersonaNatural, String> jurDireccion;
@@ -54,7 +54,7 @@ public class ControlPersonaNatural implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jurNombre.setCellValueFactory(new PropertyValueFactory<PersonaNatural, String>("nombre"));
         jurApellido.setCellValueFactory(new PropertyValueFactory<PersonaNatural, String>("apellidos"));
-        jurId.setCellValueFactory(new PropertyValueFactory<PersonaNatural, String>("identificacion"));
+        jurID.setCellValueFactory(new PropertyValueFactory<PersonaNatural, String>("identificacion"));
         jurDireccion.setCellValueFactory(new PropertyValueFactory<PersonaNatural, String>("direccion"));
         jurTelefono.setCellValueFactory(new PropertyValueFactory<PersonaNatural, String>("telefono"));
         jurEmail.setCellValueFactory(new PropertyValueFactory<PersonaNatural, String>("Email"));
@@ -83,6 +83,7 @@ public class ControlPersonaNatural implements Initializable {
 
     @FXML
     private TextField textFechaNacimiento;
+
 
     public void agregarPersonaNatural(ActionEvent event) {
         if (hayAlgo()) {
@@ -113,6 +114,7 @@ public class ControlPersonaNatural implements Initializable {
             alert.showAndWait();
         }
     }
+
 
     public void modificacion(ActionEvent event) throws IOException{
         PersonaNatural persona = this.tablaNatural.getSelectionModel().getSelectedItem();
@@ -176,11 +178,13 @@ public class ControlPersonaNatural implements Initializable {
         textDireccion.setText("");textTelefono.setText("");textEmail.setText("");textFechaNacimiento.setText("");
     }
 
+    @FXML
     public void actualizar(){
         listaClientesNaturales =CrudNatural.leerClienteNatu();
         listaClientesNaturalesObservable = FXCollections.observableList(listaClientesNaturales);
         tablaNatural.setItems(listaClientesNaturalesObservable);
     }
+    @FXML
     void switchScena1(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Scena1.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -188,6 +192,7 @@ public class ControlPersonaNatural implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 
     public  void eliminarClienteNatural(){
         PersonaNatural persona = this.tablaNatural.getSelectionModel().getSelectedItem();
@@ -203,6 +208,9 @@ public class ControlPersonaNatural implements Initializable {
             vaciarCampos();
         }
     }
+
+
+
 
     public void volver(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Scena1.fxml"));
