@@ -13,15 +13,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.demo.demo.ScenaControl">
    <children>
-      <TableView fx:id="listaJuridicos" layoutX="14.0" layoutY="12.0" prefHeight="300.0" prefWidth="564.0">
+      <TableView fx:id="tablaNatural" layoutX="14.0" layoutY="12.0" prefHeight="300.0" prefWidth="564.0">
          <columns>
             <TableColumn fx:id="jurNombre" prefWidth="75.0" text="Nombre" />
             <TableColumn fx:id="jurApellido" prefWidth="75.0" text="Apellido" />
             <TableColumn fx:id="jurID" prefWidth="75.0" text="ID" />
             <TableColumn fx:id="jurDireccion" prefWidth="75.0" text="Direccion" />
             <TableColumn fx:id="jurTelefono" prefWidth="75.0" text="Telefono" />
-            <TableColumn fx:id="jurNit" prefWidth="75.0" text="Email" />
-            <TableColumn fx:id="jurNit1" prefWidth="113.0" text="Fecha Nacimiento" />
+            <TableColumn fx:id="jurEmail" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="jurFechaNacimiento" prefWidth="113.0" text="Fecha Nacimiento" />
          </columns>
       </TableView>
       <GridPane layoutX="14.0" layoutY="321.0" prefHeight="180.0" prefWidth="214.0">
@@ -49,10 +49,10 @@
             <TextField fx:id="textDireccion" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" GridPane.rowIndex="4" />
             <TextField fx:id="textTelefono" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="textNit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="textEmail" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" GridPane.rowIndex="5" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Nacimiento" GridPane.rowIndex="6" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <DatePicker fx:id="textFechaNacimiento" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <Button layoutX="254.0" layoutY="321.0" mnemonicParsing="false" text="Añadir" />
