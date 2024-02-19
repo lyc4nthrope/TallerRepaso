@@ -20,7 +20,7 @@ public class CrudNatural {
                 writer.write(personaNatural.getNombre()+";"
                         + personaNatural.getApellidos()+";"+ personaNatural.getIdentificacion()
                         +";"+ personaNatural.getDireccion()+";"+ personaNatural.getTelefono()+";"+personaNatural.getEmail()+
-                        ";"+personaNatural.getFechaNacimiento()+"/n");
+                        ";"+personaNatural.getFechaNacimiento()+";\n");
 
             }catch (IOException e){
                 e.printStackTrace();
@@ -88,7 +88,7 @@ public class CrudNatural {
                         + cliPersonaNaturals.get(i).getApellidos()+";"+ cliPersonaNaturals.get(i).getIdentificacion()
                         +";"+ cliPersonaNaturals.get(i).getDireccion()+";"+ cliPersonaNaturals.get(i).getTelefono()+";"
                         +cliPersonaNaturals.get(i).getEmail()+
-                        ";"+cliPersonaNaturals.get(i).getFechaNacimiento()+"/n");
+                        ";"+cliPersonaNaturals.get(i).getFechaNacimiento()+";\n");
             }
         }catch (IOException e){
             e.printStackTrace();

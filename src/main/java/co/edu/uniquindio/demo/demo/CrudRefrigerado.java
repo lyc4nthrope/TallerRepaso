@@ -15,7 +15,7 @@ public class CrudRefrigerado {
                         +crearProductoRefrigerados.get(i).getValorUnitario()+";"
                         +crearProductoRefrigerados.get(i).getCantidadExistencia()+";"
                         +crearProductoRefrigerados.get(i).getCodigoAprobado()+";"
-                        +crearProductoRefrigerados.get(i).getTempRecomendada()+"/n");
+                        +crearProductoRefrigerados.get(i).getTempRecomendada()+";\n");
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class CrudRefrigerado {
                     +productoRefrigerado.getValorUnitario()+";"
                     +productoRefrigerado.getCantidadExistencia()+";"
                     +productoRefrigerado.getCodigoAprobado()+";"
-                    +productoRefrigerado.getTempRecomendada()+"/n");
+                    +productoRefrigerado.getTempRecomendada()+";\n");
 
         }catch (IOException e){
             e.printStackTrace();

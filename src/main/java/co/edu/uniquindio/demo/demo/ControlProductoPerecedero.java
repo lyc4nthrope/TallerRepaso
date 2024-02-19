@@ -169,6 +169,7 @@ public class ControlProductoPerecedero implements Initializable {
         textValorU.setText("");textCantidad.setText("");textFechaVencimiento.setText("");
     }
 
+    @FXML
     void switchScena1(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Scena1.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

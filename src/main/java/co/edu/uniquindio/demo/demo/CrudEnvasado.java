@@ -12,7 +12,7 @@ public class CrudEnvasado {
             writer.write(productoEnvasado.getCodigo() + ";" +
                     productoEnvasado.getNombre() + productoEnvasado.getDescripcion() + productoEnvasado.getValorUnitario()
                     + productoEnvasado.getCantidadExistencia() + productoEnvasado.getFechaEnvasado() + productoEnvasado.getPesoEnvase()
-                    + productoEnvasado.getPaisOrigen() + "/n");
+                    + productoEnvasado.getPaisOrigen() + ";\n");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,7 +73,7 @@ public class CrudEnvasado {
                         +crearProductoEnvasados.get(i).getCantidadExistencia()+";"
                         +crearProductoEnvasados.get(i).getFechaEnvasado()+";"
                         +crearProductoEnvasados.get(i).getPesoEnvase()+";"
-                        +crearProductoEnvasados.get(i).getPaisOrigen()+"/n");
+                        +crearProductoEnvasados.get(i).getPaisOrigen()+";\n");
             }
 
         }catch (IOException e){

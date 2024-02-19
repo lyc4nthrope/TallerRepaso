@@ -16,7 +16,7 @@ public class CrudPerecedero {
                         +crearProductoPerecederos.get(i).getDescripcion()+";"
                         +crearProductoPerecederos.get(i).getValorUnitario()+";"
                         +crearProductoPerecederos.get(i).getCantidadExistencia()+";"
-                        +crearProductoPerecederos.get(i).getFechaVencimiento()+"/n");
+                        +crearProductoPerecederos.get(i).getFechaVencimiento()+";\n");
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -38,7 +38,7 @@ public class CrudPerecedero {
                         +productoPerecedero.getDescripcion()+";"
                         +productoPerecedero.getValorUnitario()+";"
                         +productoPerecedero.getCantidadExistencia()+";"
-                        +productoPerecedero.getFechaVencimiento()+"/n");
+                        +productoPerecedero.getFechaVencimiento()+";\n");
             }catch (IOException e){
                 e.printStackTrace();
             }
