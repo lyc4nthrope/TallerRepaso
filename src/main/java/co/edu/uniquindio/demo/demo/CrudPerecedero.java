@@ -1,12 +1,14 @@
 package co.edu.uniquindio.demo.demo;
 
+import javafx.scene.control.Alert;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class CrudPerecedero {
     static String archivoPerecedero = "CRUD_ProductoPerecedero.txt";
 
-    public void crearProductoPeres(ArrayList<ProductoPerecedero> crearProductoPerecederos){
+    public static void crearProductoPeres(ArrayList<ProductoPerecedero> crearProductoPerecederos){
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivoPerecedero))) {
             for (int i =0; i<crearProductoPerecederos.size();i++){
                 writer.write(crearProductoPerecederos.get(i).getCodigo()+";"
@@ -14,7 +16,7 @@ public class CrudPerecedero {
                         +crearProductoPerecederos.get(i).getDescripcion()+";"
                         +crearProductoPerecederos.get(i).getValorUnitario()+";"
                         +crearProductoPerecederos.get(i).getCantidadExistencia()+";"
-                        +crearProductoPerecederos.get(i).getFechaVencimiento()+"/n");
+                        +crearProductoPerecederos.get(i).getFechaVencimiento()+";\n");
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -22,17 +24,24 @@ public class CrudPerecedero {
 
     }
 
-    public void crearProductoPere(ProductoPerecedero productoPerecedero){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivoPerecedero, true))) {
-            writer.write(productoPerecedero.getCodigo()+";"
-                    +productoPerecedero.getNombre()+";"
-                    +productoPerecedero.getDescripcion()+";"
-                    +productoPerecedero.getValorUnitario()+";"
-                    +productoPerecedero.getCantidadExistencia()+";"
-                    +productoPerecedero.getFechaVencimiento()+"/n");
-
-        }catch (IOException e){
-            e.printStackTrace();
+    public static void crearProductoPere(ProductoPerecedero productoPerecedero){
+        if(existeId(productoPerecedero.getCodigo())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Cliente ya registrado");
+            alert.showAndWait();
+        }else {
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivoPerecedero, true))) {
+                writer.write(productoPerecedero.getCodigo()+";"
+                        +productoPerecedero.getNombre()+";"
+                        +productoPerecedero.getDescripcion()+";"
+                        +productoPerecedero.getValorUnitario()+";"
+                        +productoPerecedero.getCantidadExistencia()+";"
+                        +productoPerecedero.getFechaVencimiento()+";\n");
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -51,27 +60,46 @@ public class CrudPerecedero {
                 cliProductoPerecederos.add(new ProductoPerecedero(codigo, nombre, descripcion, valorUnitario, cantidadExistencia, fechaVencimiento));
             }
         }catch (IOException e){
-            e.printStackTrace();
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(archivoPerecedero, true));
+            }catch (IOException ex){
+                throw new RuntimeException(ex);
+            }
+            return cliProductoPerecederos;
         }
         return cliProductoPerecederos;
     }
 
-    public void actualizarProductoPere(String codigo, ProductoPerecedero productoPerecedero){
+    public static void actualizarProductoPere(ProductoPerecedero productoPerecedero, String codigo){
         int posicion = 0;
         ArrayList<ProductoPerecedero> cliProductoPerecedero = leerProductoPerecedero();
-        if (cliProductoPerecedero.get(posicion).getCodigo().equals(codigo)){
-            cliProductoPerecedero.set(posicion, productoPerecedero);
+        for (int i = 0; i < cliProductoPerecedero.size() ; i++) {
+            if (cliProductoPerecedero.get(posicion).getCodigo().equals(codigo)){
+                cliProductoPerecedero.set(posicion, productoPerecedero);
+            }
         }
         crearProductoPeres(cliProductoPerecedero);
     }
 
-    public void eliminarProductoPere(String codigo, ProductoPerecedero productoPerecedero){
+    public static void eliminarProductoPere(String codigo){
         int posicion= 0;//
         ArrayList<ProductoPerecedero> cliProductoPerecedero = leerProductoPerecedero();
-        if (cliProductoPerecedero.get(posicion).getCodigo().equals(codigo)){
-            cliProductoPerecedero.remove(posicion);
+        for (int i = 0; i < cliProductoPerecedero.size() ; i++) {
+            if (cliProductoPerecedero.get(posicion).getCodigo().equals(codigo)){
+                cliProductoPerecedero.remove(posicion);
+            }
         }
-
         crearProductoPeres(cliProductoPerecedero);
+    }
+
+    public static boolean existeId(String id){
+        boolean existe = false;
+        ArrayList<ProductoPerecedero> listaProductoPerecedero= leerProductoPerecedero();
+        for (int i = 0; i < listaProductoPerecedero.size()&&!existe; i++) {
+            if (id.equals(listaProductoPerecedero.get(i).getCodigo())){
+                existe=true;
+            }
+        }
+        return existe;
     }
 }

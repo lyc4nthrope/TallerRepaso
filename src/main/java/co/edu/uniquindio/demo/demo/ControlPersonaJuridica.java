@@ -13,16 +13,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.*;
+
 public class ControlPersonaJuridica implements Initializable {
-    ArrayList<PersonaJuridica> listaClientesJuridicos =CrudJuridico.leerClienteJuridico();
+    ArrayList<PersonaJuridica> listaClientesJuridicos = CrudJuridico.leerClienteJuridico();
     @FXML
     private TableColumn<PersonaJuridica, String> jurApellido;
 
