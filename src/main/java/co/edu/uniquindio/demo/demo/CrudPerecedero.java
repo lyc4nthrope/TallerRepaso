@@ -45,7 +45,7 @@ public class CrudPerecedero {
                 String codigo = datos[0];
                 String nombre = datos[1];
                 String descripcion = datos[2];
-                double valorUnitario = Double.parseDouble(datos[3]);
+                Float valorUnitario = Float.parseFloat(datos[3]);
                 int cantidadExistencia = Integer.parseInt(datos[4]);
                 String fechaVencimiento = datos[5];
                 cliProductoPerecederos.add(new ProductoPerecedero(codigo, nombre, descripcion, valorUnitario, cantidadExistencia, fechaVencimiento));

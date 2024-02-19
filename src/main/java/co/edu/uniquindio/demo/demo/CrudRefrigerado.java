@@ -46,7 +46,7 @@ public class CrudRefrigerado {
                 String codigo = datos[0];
                 String nombre = datos[1];
                 String descripcion = datos[2];
-                double valorUnitario = Double.parseDouble(datos[3]);
+                Float valorUnitario = Float.parseFloat(datos[3]);
                 int cantidadExistencia = Integer.parseInt(datos[4]);
                 String  codigoAprobado= datos[5];
                 String tempRecomendada = datos[6];

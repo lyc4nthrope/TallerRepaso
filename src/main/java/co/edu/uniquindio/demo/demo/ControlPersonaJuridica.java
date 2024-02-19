@@ -194,15 +194,6 @@ public class ControlPersonaJuridica implements Initializable {
         tablaJuridicos.setItems(listaClientesJuridicosObservable);
     }
 
-    public void volver(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Scena1.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-
     public void seleccionar(javafx.scene.input.MouseEvent mouseEvent) {
         PersonaJuridica persona= this.tablaJuridicos.getSelectionModel().getSelectedItem();
         if(persona!=null){

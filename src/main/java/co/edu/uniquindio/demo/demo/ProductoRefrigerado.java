@@ -5,7 +5,7 @@ public class ProductoRefrigerado extends Producto{
     private String codigoAprobado;
     private String tempRecomendada;
 
-    public ProductoRefrigerado(String codigo, String nombre, String descripcion, double valorUnitario, int cantidadExistencia, String codigoAprobado, String tempRecomendada) {
+    public ProductoRefrigerado(String codigo, String nombre, String descripcion, Float valorUnitario, int cantidadExistencia, String codigoAprobado, String tempRecomendada) {
         super(codigo, nombre, descripcion, valorUnitario, cantidadExistencia);
         this.codigoAprobado = codigoAprobado;
         this.tempRecomendada = tempRecomendada;

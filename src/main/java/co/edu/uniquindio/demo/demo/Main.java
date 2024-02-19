@@ -45,6 +45,6 @@ public class Main extends Application {
  *     personanatural persona = new personanatural(txt_nombre....);
  *     natural.crearClienteNatu(persona);
  * }else{
- *     Joptio.Show.MensaggeDialog(null,"hay campos vacios o no se estan guardando los datos")
+ *     Joptio.Show.MensaggeDialog(null,"hay campos vivacious o no se estan guardando los datos")
  * }
  */

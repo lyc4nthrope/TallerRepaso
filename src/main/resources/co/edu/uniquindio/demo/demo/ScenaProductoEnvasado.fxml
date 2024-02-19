@@ -12,8 +12,20 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.demo.demo.ScenaControl">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.demo.demo.ControlProductoEnvasado">
    <children>
+      <TableView fx:id="listaJuridicos" layoutX="24.0" layoutY="22.0" onMouseClicked="#seleccionar" prefHeight="263.0" prefWidth="608.0">
+         <columns>
+            <TableColumn fx:id="jurCodigo" prefWidth="75.0" text="Codigo" />
+            <TableColumn fx:id="jurNombre" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="jurDescripcion" prefWidth="75.0" text="Descripcion" />
+            <TableColumn fx:id="jurValorUnidad" prefWidth="75.0" text="Valor U" />
+            <TableColumn fx:id="jurCantidad" prefWidth="75.0" text="Cantidad" />
+            <TableColumn fx:id="jurFechaEnvase" prefWidth="93.0" text="Fecha Envase" />
+            <TableColumn fx:id="jurPeso" prefWidth="69.0" text="Peso" />
+            <TableColumn fx:id="jurPais" prefWidth="69.0" text="Pais" />
+         </columns>
+      </TableView>
       <GridPane layoutX="14.0" layoutY="309.0" prefHeight="180.0" prefWidth="287.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.0" minWidth="10.0" prefWidth="105.0" />
@@ -31,36 +43,26 @@
          </rowConstraints>
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo" />
-            <TextField fx:id="textNombre" prefHeight="25.0" prefWidth="127.0" GridPane.columnIndex="1" />
+            <TextField fx:id="textCodigo" prefHeight="25.0" prefWidth="127.0" GridPane.columnIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" GridPane.rowIndex="1" />
-            <TextField fx:id="textApellido" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descripcion" GridPane.rowIndex="2" />
-            <TextField fx:id="textID" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="textDescripcion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valor Unidad" GridPane.rowIndex="3" />
-            <TextField fx:id="textDireccion" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="textValorUnidad" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad Existencia" GridPane.rowIndex="4" />
-            <TextField fx:id="textTelefono" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="textCantExistencias" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Envasado" GridPane.rowIndex="5" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="txtFechaEnvasado" promptText="Ingrese Fecha" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Peso Envase" GridPane.rowIndex="6" />
-            <TextField fx:id="textNit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="textPesoEnvase" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pais Origen" GridPane.rowIndex="7" />
             <ComboBox fx:id="comboxPais" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <Button layoutX="388.0" layoutY="309.0" mnemonicParsing="false" text="Añadir" />
+      <Button layoutX="388.0" layoutY="309.0" mnemonicParsing="false" onAction="#agregarProductoEnvasado" text="Añadir" />
       <Button layoutX="382.0" layoutY="441.0" mnemonicParsing="false" onAction="#switchScena1" text="Regresar" />
-      <TableView fx:id="listaJuridicos" layoutX="24.0" layoutY="22.0" prefHeight="263.0" prefWidth="608.0">
-         <columns>
-            <TableColumn fx:id="jurNombre" prefWidth="75.0" text="Codigo" />
-            <TableColumn fx:id="jurApellido" prefWidth="75.0" text="Nombre" />
-            <TableColumn fx:id="jurID" prefWidth="75.0" text="Descripcion" />
-            <TableColumn fx:id="jurDireccion" prefWidth="75.0" text="Valor U" />
-            <TableColumn fx:id="jurTelefono" prefWidth="75.0" text="Cantidad" />
-            <TableColumn fx:id="jurNit" prefWidth="93.0" text="Fecha Envase" />
-            <TableColumn fx:id="jurNit1" prefWidth="69.0" text="Peso" />
-            <TableColumn fx:id="jurNit11" prefWidth="69.0" text="Pais" />
-         </columns>
-      </TableView>
+      <Button layoutX="388.0" layoutY="352.0" mnemonicParsing="false" onAction="#modificacion" text="Modificar" />
+      <Button layoutX="388.0" layoutY="393.0" mnemonicParsing="false" onAction="#eliminarProductoEnvasado" text="Eliminar" />
    </children>
 </AnchorPane>
