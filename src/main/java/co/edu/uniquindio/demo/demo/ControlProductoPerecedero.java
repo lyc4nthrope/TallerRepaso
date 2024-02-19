@@ -77,6 +77,85 @@ public class ControlProductoPerecedero implements Initializable {
     @FXML
     private TextField textFechaVencimiento;
 
+    public void agregarProductoPerecedero(ActionEvent event) {
+        if (hayAlgo()) {
+            String codigo = textCodigo.getText();
+            String nombre = textNombre.getText();
+            String descripcion = textDescripcion.getText();
+            double valorU = Double.parseDouble(textValorU.getText());
+            int cantidad = Integer.parseInt(textCantidad.getText());
+            String fechaVencimiento = textFechaVencimiento.getText();
+            vaciarCampos();
+            ProductoPerecedero productoPerecedero = new ProductoPerecedero(codigo, nombre, descripcion, valorU, cantidad, fechaVencimiento);
+            if (CrudPerecedero.existeId(productoPerecedero.getCodigo())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Datos ya ingresados");
+                alert.showAndWait();
+            }else {
+                CrudPerecedero.crearProductoPere(productoPerecedero);
+                actualizar();
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Llene todo");
+            alert.showAndWait();
+        }
+    }
+
+    public void modificacion(ActionEvent event) throws IOException{
+        ProductoPerecedero productoPerecedero = this.tablaProductosPerecederos.getSelectionModel().getSelectedItem();
+        if (productoPerecedero == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Debes seleccionar una persona");
+            alert.showAndWait();
+        }else{
+            if (hayAlgo()){
+                String codigo = textCodigo.getText();
+                String nombre = textNombre.getText();
+                String descripcion = textDescripcion.getText();
+                double valorU = Double.parseDouble(textValorU.getText());
+                int cantidad = Integer.parseInt(textCantidad.getText());
+                String fechaVencimiento = textFechaVencimiento.getText();
+                vaciarCampos();
+                ProductoPerecedero productoPerecederoAux = new ProductoPerecedero(codigo, nombre, descripcion, valorU, cantidad, fechaVencimiento);
+                boolean existNatural = listaProductoPerecedero.contains(productoPerecederoAux);
+                if (existNatural){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("Datos iguales a otro Cliente");
+                    alert.showAndWait();
+                }else{
+                    CrudPerecedero.actualizarProductoPere(productoPerecederoAux, productoPerecedero.getCodigo());
+                    actualizar();
+                    vaciarCampos();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Info");
+                    alert.setContentText("Modificacion hecha");
+                    alert.showAndWait();
+                }
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Llene todo");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    public void actualizar(){
+        listaProductoPerecedero=CrudPerecedero.leerProductoPerecedero();
+        listaProductosPerecederosObservable = FXCollections.observableList(listaProductoPerecedero);
+        tablaProductosPerecederos.setItems(listaProductosPerecederosObservable);
+    }
     public boolean hayAlgo(){
         boolean hayAlgo=false;
         if (!textCodigo.getText().isEmpty() && !textNombre.getText().isEmpty() && !textDescripcion.getText().isEmpty()
@@ -108,7 +187,6 @@ public class ControlProductoPerecedero implements Initializable {
             alert.setContentText("Debes seleccionar una persona");
             alert.showAndWait();
         }else {
-
             actualizar();
             vaciarCampos();
         }
