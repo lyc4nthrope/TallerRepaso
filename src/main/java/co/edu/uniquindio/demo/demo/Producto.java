@@ -40,7 +40,7 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public double getValorUnitario() {
+    public String getValorUnitario() {
         return valorUnitario;
     }
 
@@ -48,7 +48,7 @@ public class Producto {
         this.valorUnitario = valorUnitario;
     }
 
-    public int getCantidadExistencia() {
+    public String getCantidadExistencia() {
         return cantidadExistencia;
     }
 
