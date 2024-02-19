@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.demo.demo.ControlProductoEnvasado">
    <children>
-      <TableView fx:id="listaJuridicos" layoutX="24.0" layoutY="22.0" onMouseClicked="#seleccionar" prefHeight="263.0" prefWidth="608.0">
+      <TableView fx:id="tablaProdEnvasados" layoutX="24.0" layoutY="22.0" onMouseClicked="#seleccionar" prefHeight="263.0" prefWidth="608.0">
          <columns>
             <TableColumn fx:id="jurCodigo" prefWidth="75.0" text="Codigo" />
             <TableColumn fx:id="jurNombre" prefWidth="75.0" text="Nombre" />

@@ -13,6 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,8 +80,9 @@ public class ControlProductoEnvasado implements Initializable {
     @FXML
     private TextField txtNombre;
 
-    ArrayList<ProductoEnvasado> productosEnvasados = CrudEnvasado.leerProductoEnvasado();
-    ObservableList<ProductoEnvasado> productoEnvasadosObservable = FXCollections.observableList(productosEnvasados);
+    private ArrayList<ProductoEnvasado> productosEnvasados = CrudEnvasado.leerProductoEnvasado();
+    private ObservableList<ProductoEnvasado> productoEnvasadosObservable = FXCollections.observableList(productosEnvasados);
+    private ObservableList<String> paises = FXCollections.observableArrayList("Colombia","Chile","Argentina","Ecuador","Peru");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,10 +94,8 @@ public class ControlProductoEnvasado implements Initializable {
         this.jurFechaEnvase.setCellValueFactory(new PropertyValueFactory<ProductoEnvasado, Date>("fechaEnvasado"));
         this.jurPeso.setCellValueFactory(new PropertyValueFactory<ProductoEnvasado, Integer>("pesoEnvase"));
         this.jurPais.setCellValueFactory(new PropertyValueFactory<ProductoEnvasado, String>("paisOrigen"));
-        productosEnvasados =CrudEnvasado.leerProductoEnvasado();
-        ObservableList<String> paises = FXCollections.observableArrayList("Colombia","Chile","Argentina","Ecuador","Peru");
         comboxPais.setItems(paises);
-        if (tablaProdEnvasados!=null){tablaProdEnvasados.setItems(productoEnvasadosObservable);}
+        tablaProdEnvasados.setItems(productoEnvasadosObservable);
     }
     public void seleccionar(javafx.scene.input.MouseEvent mouseEvent) {
         ProductoEnvasado envasado= this.tablaProdEnvasados.getSelectionModel().getSelectedItem();
@@ -213,7 +218,7 @@ public class ControlProductoEnvasado implements Initializable {
             alert.setContentText("Debes seleccionar una persona");
             alert.showAndWait();
         }else {
-            CrudJuridico.eliminarClienteJuri(productoEnvasado.getCodigo());
+            CrudEnvasado.eliminarProductoEnva(productoEnvasado.getCodigo());
             actualizar();
             vaciarCampos();
         }
