@@ -85,6 +85,9 @@ public class CrudPerecedero {
         int posicion= 0;//
         ArrayList<ProductoPerecedero> cliProductoPerecedero = leerProductoPerecedero();
         for (int i = 0; i < cliProductoPerecedero.size() ; i++) {
+            if (cliProductoPerecedero.get(posicion).getCodigo().equals(codigo)){
+                cliProductoPerecedero.remove(posicion);
+            }
         }
         crearProductoPeres(cliProductoPerecedero);
     }
