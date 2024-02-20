@@ -47,7 +47,7 @@ public class ControlRefrijerado implements Initializable {
 
     ObservableList<ProductoRefrigerado> listaProductosRefrijeradosObservable = FXCollections.observableList(listaProductoRefrijerado);
 
-    @Override
+   @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jurCodigo.setCellValueFactory(new PropertyValueFactory<ProductoRefrigerado, String>("codigo"));
         jurNombre.setCellValueFactory(new PropertyValueFactory<ProductoRefrigerado, String>("nombre"));
