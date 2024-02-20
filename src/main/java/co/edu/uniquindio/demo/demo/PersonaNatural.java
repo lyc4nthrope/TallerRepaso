@@ -1,8 +1,8 @@
 package co.edu.uniquindio.demo.demo;
 
-import java.time.LocalDate;
 
-public class PersonaNatural extends Cliente{
+
+public class PersonaNatural extends Cliente {
     private String email;
     private String fechaNacimiento;
 
@@ -28,3 +28,6 @@ public class PersonaNatural extends Cliente{
         this.fechaNacimiento = fechaNacimiento;
     }
 }
+
+
+

@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class CrudNatural {
-    static String archivo="CRUD_ClienteNatu.txt";
+    static String archivoNatural = "CRUD_ClienteNatural.txt";
     public static void crearClienteNatu(PersonaNatural personaNatural) {
 
         if (existeId(personaNatural.getIdentificacion())){
@@ -16,11 +16,11 @@ public class CrudNatural {
             alert.setContentText("Cliente ya registrado");
             alert.showAndWait();
         }else {
-            try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivo,true))) {
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivoNatural,true))) {
                 writer.write(personaNatural.getNombre()+";"
                         + personaNatural.getApellidos()+";"+ personaNatural.getIdentificacion()
                         +";"+ personaNatural.getDireccion()+";"+ personaNatural.getTelefono()+";"+personaNatural.getEmail()+
-                        ";"+personaNatural.getFechaNacimiento()+"/n");
+                        ";"+personaNatural.getFechaNacimiento()+";\n");
 
             }catch (IOException e){
                 e.printStackTrace();
@@ -32,7 +32,7 @@ public class CrudNatural {
     public static ArrayList<PersonaNatural> leerClienteNatu() {
         // Implementación para leer un cliente de la base de datos por identificación
         ArrayList<PersonaNatural> cliPersonaNaturals = new ArrayList<>();
-        try(BufferedReader reader= new BufferedReader(new FileReader(archivo))) {
+        try(BufferedReader reader= new BufferedReader(new FileReader(archivoNatural))) {
             String line;
             while ((line = reader.readLine()) != null){
                 String[] datos= line.split(";");
@@ -47,7 +47,7 @@ public class CrudNatural {
             }
         }catch (IOException e){
             try{
-                BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(archivoNatural, true));
             }catch (IOException ex){
                 throw new RuntimeException(ex);
             }
@@ -82,13 +82,13 @@ public class CrudNatural {
         crearClientesNatus(cliPersonaNaturals);
     }
     public static void crearClientesNatus(ArrayList<PersonaNatural> cliPersonaNaturals) {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivoNatural))) {
             for (int i=0; i < cliPersonaNaturals.size();i++){
                 writer.write(cliPersonaNaturals.get(i).getNombre()+";"
                         + cliPersonaNaturals.get(i).getApellidos()+";"+ cliPersonaNaturals.get(i).getIdentificacion()
                         +";"+ cliPersonaNaturals.get(i).getDireccion()+";"+ cliPersonaNaturals.get(i).getTelefono()+";"
                         +cliPersonaNaturals.get(i).getEmail()+
-                        ";"+cliPersonaNaturals.get(i).getFechaNacimiento()+"/n");
+                        ";"+cliPersonaNaturals.get(i).getFechaNacimiento()+";\n");
             }
         }catch (IOException e){
             e.printStackTrace();

@@ -51,28 +51,12 @@ public class Cliente {
         return telefono;
     }
 
-    public void setTelefono(String telefono){
+    public void setTelefono(String telefono) {
 
-    }
-        //..
-
-    // Métodos CRUD
-    public void crearCliente() {
-
-    }
-
-    public void leerCliente(String identificacion) {
-        // Implementación para leer un cliente de la base de datos por identificación
-    }
-
-    public void actualizarCliente() {
-        // Implementación para actualizar un cliente en la base de datos
-    }
-
-    public void eliminarCliente() {
-        // Implementación para eliminar un cliente de la base de datos
     }
 }
+
+
 
 
 

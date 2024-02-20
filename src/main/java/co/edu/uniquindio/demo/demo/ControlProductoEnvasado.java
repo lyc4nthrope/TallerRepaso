@@ -90,7 +90,7 @@ public class ControlProductoEnvasado implements Initializable {
         productosEnvasados =CrudEnvasado.leerProductoEnvasado();
         ObservableList<String> paises = FXCollections.observableArrayList("Colombia","Chile","Argentina","Ecuador","Peru");
         comboxPais.setItems(paises);
-        if (tablaProdEnvasados!=null){tablaProdEnvasados.setItems(productoEnvasadosObservable);}
+        tablaProdEnvasados.setItems(productoEnvasadosObservable);
     }
     public void seleccionar(javafx.scene.input.MouseEvent mouseEvent) {
         ProductoEnvasado envasado= this.tablaProdEnvasados.getSelectionModel().getSelectedItem();
@@ -107,26 +107,35 @@ public class ControlProductoEnvasado implements Initializable {
     }
     public void agregarProductoEnvasado(ActionEvent event){
         if(hayAlgo()){
-            String codigo = textCodigo.getText();
-            String nombre = txtNombre.getText();
-            String descripcion = textDescripcion.getText();
-            Float valorUnidad = Float.valueOf(textValorUnidad.getText());
-            Integer cantExistencias = Integer.valueOf(textCantExistencias.getText());
-            LocalDate fechaEnvasado = txtFechaEnvasado.getValue();
-            Integer peso = Integer.valueOf(textPesoEnvase.getText());
-            String pais = comboxPais.getValue();
-            vaciarCampos();
-            ProductoEnvasado productoEnvasado = new ProductoEnvasado(codigo,nombre,descripcion,valorUnidad,cantExistencias,fechaEnvasado,peso,pais);
-            if(CrudEnvasado.existeCodigo(productoEnvasado.getCodigo())){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText("Producto ya registrado");
-                alert.showAndWait();
-            }else{
-                CrudEnvasado.crearProductoEnvasado(productoEnvasado);
-                actualizar();
-            }
+            try {
+                String codigo = textCodigo.getText();
+                String nombre = txtNombre.getText();
+                String descripcion = textDescripcion.getText();
+                Float valorUnidad = Float.valueOf(textValorUnidad.getText());
+                Integer cantExistencias = Integer.valueOf(textCantExistencias.getText());
+                LocalDate fechaEnvasado = txtFechaEnvasado.getValue();
+                Integer peso = Integer.valueOf(textPesoEnvase.getText());
+                String pais = comboxPais.getValue();
+                vaciarCampos();
+                ProductoEnvasado productoEnvasado = new ProductoEnvasado(codigo,nombre,descripcion,valorUnidad,cantExistencias,fechaEnvasado,peso,pais);
+                if(CrudEnvasado.existeCodigo(productoEnvasado.getCodigo())){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("Producto ya registrado");
+                    alert.showAndWait();
+                }else{
+                    CrudEnvasado.crearProductoEnvasado(productoEnvasado);
+                    actualizar();
+                }
+        }catch (NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Ingreso de datos invalido(s)");
+            alert.showAndWait();
+        }
+
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -168,6 +177,7 @@ public class ControlProductoEnvasado implements Initializable {
             alert.showAndWait();
         }else {
             if(hayAlgo()){
+            try {
                 String codigo = textCodigo.getText();
                 String nombre = txtNombre.getText();
                 String descripcion = textDescripcion.getText();
@@ -195,6 +205,14 @@ public class ControlProductoEnvasado implements Initializable {
                     alert.setContentText("Modificacion hecha");
                     alert.showAndWait();
                 }
+            }catch (NumberFormatException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Ingreso de datos invalido(s)");
+                alert.showAndWait();
+            }
+
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
@@ -213,7 +231,7 @@ public class ControlProductoEnvasado implements Initializable {
             alert.setContentText("Debes seleccionar una persona");
             alert.showAndWait();
         }else {
-            CrudJuridico.eliminarClienteJuri(productoEnvasado.getCodigo());
+            CrudEnvasado.eliminarProductoEnva(productoEnvasado.getCodigo());
             actualizar();
             vaciarCampos();
         }

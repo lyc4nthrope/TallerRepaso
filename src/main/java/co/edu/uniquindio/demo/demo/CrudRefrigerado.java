@@ -1,12 +1,14 @@
 package co.edu.uniquindio.demo.demo;
 
+import javafx.scene.control.Alert;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class CrudRefrigerado {
     static String archivoRefrigerado = "CRUD_ProductoRefregerado.txt";
 
-    public void crearProductoRefris(ArrayList<ProductoRefrigerado> crearProductoRefrigerados){
+    public static void crearProductoRefris(ArrayList<ProductoRefrigerado> crearProductoRefrigerados){
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivoRefrigerado))) {
             for (int i =0; i<crearProductoRefrigerados.size();i++){
                 writer.write(crearProductoRefrigerados.get(i).getCodigo()+";"
@@ -15,25 +17,34 @@ public class CrudRefrigerado {
                         +crearProductoRefrigerados.get(i).getValorUnitario()+";"
                         +crearProductoRefrigerados.get(i).getCantidadExistencia()+";"
                         +crearProductoRefrigerados.get(i).getCodigoAprobado()+";"
-                        +crearProductoRefrigerados.get(i).getTempRecomendada()+"/n");
+                        +crearProductoRefrigerados.get(i).getTempRecomendada()+";\n");
             }
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
-    public void crearProductoRefri(ProductoRefrigerado productoRefrigerado){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivoRefrigerado, true))) {
-            writer.write(productoRefrigerado.getCodigo()+";"
-                    +productoRefrigerado.getNombre()+";"
-                    +productoRefrigerado.getDescripcion()+";"
-                    +productoRefrigerado.getValorUnitario()+";"
-                    +productoRefrigerado.getCantidadExistencia()+";"
-                    +productoRefrigerado.getCodigoAprobado()+";"
-                    +productoRefrigerado.getTempRecomendada()+"/n");
+    public static void crearProductoRefri(ProductoRefrigerado productoRefrigerado){
 
-        }catch (IOException e){
-            e.printStackTrace();
+        if (existeId(productoRefrigerado.getCodigo())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Cliente ya registrado");
+            alert.showAndWait();
+        }else {
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivoRefrigerado, true))) {
+                writer.write(productoRefrigerado.getCodigo()+";"
+                        +productoRefrigerado.getNombre()+";"
+                        +productoRefrigerado.getDescripcion()+";"
+                        +productoRefrigerado.getValorUnitario()+";"
+                        +productoRefrigerado.getCantidadExistencia()+";"
+                        +productoRefrigerado.getCodigoAprobado()+";"
+                        +productoRefrigerado.getTempRecomendada()+";\n");
+
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -53,27 +64,43 @@ public class CrudRefrigerado {
                 cliProductoRefrigerados.add(new ProductoRefrigerado(codigo, nombre, descripcion, valorUnitario, cantidadExistencia, codigoAprobado, tempRecomendada));
             }
         }catch (IOException e){
-            e.printStackTrace();
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(archivoRefrigerado, true));
+            }catch (IOException ex){
+                throw new RuntimeException();
+            }
         }
         return cliProductoRefrigerados;
     }
 
-    public void actualizarProductoRefri(String codigo, ProductoRefrigerado productoRefrigerado){
-        int posicion = 0;
+    public static void actualizarProductoRefri(ProductoRefrigerado productoRefrigerado,String codigo){
+
         ArrayList<ProductoRefrigerado> cliProductoRefrigerado = leerProductoRefrigerados();
-        if (cliProductoRefrigerado.get(posicion).getCodigo().equals(codigo)){
-            cliProductoRefrigerado.set(posicion, productoRefrigerado);
+        for (int i = 0; i < cliProductoRefrigerado.size() ; i++) {
+            if (cliProductoRefrigerado.get(i).getCodigo().equals(codigo)){
+                cliProductoRefrigerado.set(i, productoRefrigerado);
+            }
         }
         crearProductoRefris(cliProductoRefrigerado);
     }
 
-    public void eliminarProductoRefri(String codigo, ProductoRefrigerado productoRefrigerado){
-        int posicion= 0;//
+    public static void eliminarProductoRefri(String codigo){
         ArrayList<ProductoRefrigerado> cliProductoRefrigerado = leerProductoRefrigerados();
-        if (cliProductoRefrigerado.get(posicion).getCodigo().equals(codigo)){
-            cliProductoRefrigerado.remove(posicion);
+        for (int i = 0; i < cliProductoRefrigerado.size(); i++) {
+            if (cliProductoRefrigerado.get(i).getCodigo().equals(codigo)){
+                cliProductoRefrigerado.remove(i);
+            }
         }
-
         crearProductoRefris(cliProductoRefrigerado);
+    }
+    public static boolean existeId(String codigo){
+        boolean existe = false;
+        ArrayList<ProductoRefrigerado> listaProductoRefrijerado= leerProductoRefrigerados();
+        for (int i = 0; i < listaProductoRefrijerado.size()&&!existe; i++) {
+            if (codigo.equals(listaProductoRefrijerado.get(i).getCodigo())){
+                existe=true;
+            }
+        }
+        return existe;
     }
 }

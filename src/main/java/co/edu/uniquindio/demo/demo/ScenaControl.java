@@ -5,12 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
+
 
 public class ScenaControl {
     private Stage stage;
@@ -60,13 +57,17 @@ public class ScenaControl {
         stage.setScene(scene);
         stage.show();
     }
-    public void switchScenaProductoPerecedero(ActionEvent event) throws IOException {
+
+
+    public void switchScenaProductoPerecedero(ActionEvent event) throws IOException{
         root = FXMLLoader.load(getClass().getResource("ScenaProductoPerecedero.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
+
     public void switchScenaProductoRefrigerado(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("ScenaProductoRefrigerado.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -76,8 +77,9 @@ public class ScenaControl {
     }
 
     @FXML
-    private ComboBox<String> comboxPais;
-
+    public void salir(){
+        System.exit(0);
+    }
 }
 
 

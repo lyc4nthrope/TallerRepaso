@@ -3,6 +3,7 @@ package co.edu.uniquindio.demo.demo;
 import javafx.scene.control.Alert;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CrudPerecedero {
@@ -16,7 +17,7 @@ public class CrudPerecedero {
                         +crearProductoPerecederos.get(i).getDescripcion()+";"
                         +crearProductoPerecederos.get(i).getValorUnitario()+";"
                         +crearProductoPerecederos.get(i).getCantidadExistencia()+";"
-                        +crearProductoPerecederos.get(i).getFechaVencimiento()+"/n");
+                        +crearProductoPerecederos.get(i).getFechaVencimiento()+";\n");
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -38,7 +39,7 @@ public class CrudPerecedero {
                         +productoPerecedero.getDescripcion()+";"
                         +productoPerecedero.getValorUnitario()+";"
                         +productoPerecedero.getCantidadExistencia()+";"
-                        +productoPerecedero.getFechaVencimiento()+"/n");
+                        +productoPerecedero.getFechaVencimiento()+";\n");
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -56,7 +57,7 @@ public class CrudPerecedero {
                 String descripcion = datos[2];
                 Float valorUnitario = Float.parseFloat(datos[3]);
                 int cantidadExistencia = Integer.parseInt(datos[4]);
-                String fechaVencimiento = datos[5];
+                LocalDate fechaVencimiento = LocalDate.parse(datos[5]);
                 cliProductoPerecederos.add(new ProductoPerecedero(codigo, nombre, descripcion, valorUnitario, cantidadExistencia, fechaVencimiento));
             }
         }catch (IOException e){
@@ -71,20 +72,22 @@ public class CrudPerecedero {
     }
 
     public static void actualizarProductoPere(ProductoPerecedero productoPerecedero, String codigo){
-        int posicion = 0;
         ArrayList<ProductoPerecedero> cliProductoPerecedero = leerProductoPerecedero();
         for (int i = 0; i < cliProductoPerecedero.size() ; i++) {
-            if (cliProductoPerecedero.get(posicion).getCodigo().equals(codigo)){
-                cliProductoPerecedero.set(posicion, productoPerecedero);
+            if (cliProductoPerecedero.get(i).getCodigo().equals(codigo)){
+                cliProductoPerecedero.set(i, productoPerecedero);
             }
         }
         crearProductoPeres(cliProductoPerecedero);
     }
 
     public static void eliminarProductoPere(String codigo){
-        int posicion= 0;//
+        //
         ArrayList<ProductoPerecedero> cliProductoPerecedero = leerProductoPerecedero();
         for (int i = 0; i < cliProductoPerecedero.size() ; i++) {
+            if (cliProductoPerecedero.get(i).getCodigo().equals(codigo)){
+                cliProductoPerecedero.remove(i);
+            }
         }
         crearProductoPeres(cliProductoPerecedero);
     }

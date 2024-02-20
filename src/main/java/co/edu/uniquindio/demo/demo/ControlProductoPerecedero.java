@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -53,7 +54,7 @@ public class ControlProductoPerecedero implements Initializable {
         jurNombre.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("nombre"));
         jurDescripcion.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("descripcion"));
         jurValorU.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("valorUnitario"));
-        jurCantidad.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("Cantidad"));
+        jurCantidad.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("cantidadExistencia"));
         jurFechaVencimiento.setCellValueFactory(new PropertyValueFactory<ProductoPerecedero, String>("fechaVencimiento"));
         listaProductoPerecedero = CrudPerecedero.leerProductoPerecedero();
         tablaProductosPerecederos.setItems(listaProductosPerecederosObservable);
@@ -75,28 +76,37 @@ public class ControlProductoPerecedero implements Initializable {
     private TextField textCantidad;
 
     @FXML
-    private TextField textFechaVencimiento;
+    private DatePicker textFechaVencimiento;
 
     public void agregarProductoPerecedero(ActionEvent event) {
         if (hayAlgo()) {
-            String codigo = textCodigo.getText();
-            String nombre = textNombre.getText();
-            String descripcion = textDescripcion.getText();
-            double valorU = Double.parseDouble(textValorU.getText());
-            int cantidad = Integer.parseInt(textCantidad.getText());
-            String fechaVencimiento = textFechaVencimiento.getText();
-            vaciarCampos();
-            ProductoPerecedero productoPerecedero = new ProductoPerecedero(codigo, nombre, descripcion, valorU, cantidad, fechaVencimiento);
-            if (CrudPerecedero.existeId(productoPerecedero.getCodigo())){
+            try {
+                String codigo = textCodigo.getText();
+                String nombre = textNombre.getText();
+                String descripcion = textDescripcion.getText();
+                Float valorU = Float.parseFloat(textValorU.getText());
+                int cantidad = Integer.parseInt(textCantidad.getText());
+                LocalDate fechaVencimiento = textFechaVencimiento.getValue();
+                vaciarCampos();
+                ProductoPerecedero productoPerecedero = new ProductoPerecedero(codigo, nombre, descripcion, valorU, cantidad, fechaVencimiento);
+                if (CrudPerecedero.existeId(productoPerecedero.getCodigo())){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("Datos ya ingresados");
+                    alert.showAndWait();
+                }else {
+                    CrudPerecedero.crearProductoPere(productoPerecedero);
+                    actualizar();
+                }
+            }catch (NumberFormatException e){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("Error");
-                alert.setContentText("Datos ya ingresados");
+                alert.setContentText("Ingreso de datos invalido(s)");
                 alert.showAndWait();
-            }else {
-                CrudPerecedero.crearProductoPere(productoPerecedero);
-                actualizar();
             }
+
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -116,12 +126,13 @@ public class ControlProductoPerecedero implements Initializable {
             alert.showAndWait();
         }else{
             if (hayAlgo()){
+            try {
                 String codigo = textCodigo.getText();
                 String nombre = textNombre.getText();
                 String descripcion = textDescripcion.getText();
-                double valorU = Double.parseDouble(textValorU.getText());
+                Float valorU = Float.parseFloat(textValorU.getText());
                 int cantidad = Integer.parseInt(textCantidad.getText());
-                String fechaVencimiento = textFechaVencimiento.getText();
+                LocalDate fechaVencimiento = textFechaVencimiento.getValue();
                 vaciarCampos();
                 ProductoPerecedero productoPerecederoAux = new ProductoPerecedero(codigo, nombre, descripcion, valorU, cantidad, fechaVencimiento);
                 boolean existNatural = listaProductoPerecedero.contains(productoPerecederoAux);
@@ -141,6 +152,14 @@ public class ControlProductoPerecedero implements Initializable {
                     alert.setContentText("Modificacion hecha");
                     alert.showAndWait();
                 }
+            }catch (NumberFormatException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Ingreso de datos invalido(s)");
+                alert.showAndWait();
+            }
+
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
@@ -159,7 +178,7 @@ public class ControlProductoPerecedero implements Initializable {
     public boolean hayAlgo(){
         boolean hayAlgo=false;
         if (!textCodigo.getText().isEmpty() && !textNombre.getText().isEmpty() && !textDescripcion.getText().isEmpty()
-                && !textValorU.getText().isEmpty() && !textCantidad.getText().isEmpty() && !textFechaVencimiento.getText().isEmpty()){
+                && !textValorU.getText().isEmpty() && !textCantidad.getText().isEmpty() && !(textFechaVencimiento.getValue()==null)){
             hayAlgo = true;
         }
         return hayAlgo;
@@ -167,7 +186,7 @@ public class ControlProductoPerecedero implements Initializable {
 
     public  void vaciarCampos(){
         textCodigo.setText("");textNombre.setText("");textDescripcion.setText("");
-        textValorU.setText("");textCantidad.setText("");textFechaVencimiento.setText("");
+        textValorU.setText("");textCantidad.setText("");textFechaVencimiento.setValue(null);
     }
 
     void switchScena1(ActionEvent event) throws IOException {
@@ -187,8 +206,9 @@ public class ControlProductoPerecedero implements Initializable {
             alert.setContentText("Debes seleccionar una persona");
             alert.showAndWait();
         }else {
-            actualizar();
+            CrudPerecedero.eliminarProductoPere(productoPerecedero.getCodigo());
             vaciarCampos();
+            actualizar();
         }
     }
 
@@ -206,9 +226,9 @@ public class ControlProductoPerecedero implements Initializable {
             this.textCodigo.setText(productoPerecedero.getCodigo());
             this.textNombre.setText(productoPerecedero.getNombre());
             this.textDescripcion.setText(productoPerecedero.getDescripcion());
-            this.textValorU.setText(productoPerecedero.getValorUnitario());
-            this.textCantidad.setText(productoPerecedero.getCantidadExistencia());
-            this.textFechaVencimiento.setText(productoPerecedero.getFechaVencimiento());
+            this.textValorU.setText(String.valueOf(productoPerecedero.getValorUnitario()));
+            this.textCantidad.setText(String.valueOf(productoPerecedero.getCantidadExistencia()));
+            this.textFechaVencimiento.setValue(productoPerecedero.getFechaVencimiento());
         }
     }
 }
