@@ -1,19 +1,30 @@
 package co.edu.uniquindio.demo.demo;
 
+import javafx.scene.control.Alert;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class CrudNatural {
     static String archivo="CRUD_ClienteNatu.txt";
-    public void crearClienteNatu(PersonaNatural personaNatural) {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivo,true))) {
-            writer.write(personaNatural.getNombre()+";"
-                    + personaNatural.getApellidos()+";"+ personaNatural.getIdentificacion()
-            +";"+ personaNatural.getDireccion()+";"+ personaNatural.getTelefono()+";"+personaNatural.getEmail()+
-                    ";"+personaNatural.getFechaNacimiento()+"/n");
+    public static void crearClienteNatu(PersonaNatural personaNatural) {
 
-        }catch (IOException e){
-            e.printStackTrace();
+        if (existeId(personaNatural.getIdentificacion())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Cliente ya registrado");
+            alert.showAndWait();
+        }else {
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivo,true))) {
+                writer.write(personaNatural.getNombre()+";"
+                        + personaNatural.getApellidos()+";"+ personaNatural.getIdentificacion()
+                        +";"+ personaNatural.getDireccion()+";"+ personaNatural.getTelefono()+";"+personaNatural.getEmail()+
+                        ";"+personaNatural.getFechaNacimiento()+"/n");
+
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
 
     }
@@ -46,7 +57,7 @@ public class CrudNatural {
 
 
 // crear un buscador
-    public void actualizarClienteNatu(String identificacion, PersonaNatural  personaNatural) {
+    public static void actualizarClienteNatu(PersonaNatural personaNatural, String identificacion) {
         int posicion= 0;//buscadorPersonaNatural(identificacion);
         ArrayList<PersonaNatural> cliPersonaNaturals = leerClienteNatu();
         for (int i = 0; i <cliPersonaNaturals.size() ; i++) {
@@ -57,7 +68,7 @@ public class CrudNatural {
         crearClientesNatus(cliPersonaNaturals);
     }
 
-    public void eliminarClienteNatu(String identificacion, PersonaNatural  personaNatural) {
+    public static void eliminarClienteNatu(String identificacion) {
         // Implementación para eliminar un cliente de la base de datos
         //delete  from db_amacen TablaNatural where identificacion = "identificacion";
         //update from db_amacen TablaNatural (nombre,apellido,....) values (nombre,apellido,....) where identificacion = "identificacion"
@@ -70,7 +81,7 @@ public class CrudNatural {
         }
         crearClientesNatus(cliPersonaNaturals);
     }
-    public void crearClientesNatus(ArrayList<PersonaNatural> cliPersonaNaturals) {
+    public static void crearClientesNatus(ArrayList<PersonaNatural> cliPersonaNaturals) {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
             for (int i=0; i < cliPersonaNaturals.size();i++){
                 writer.write(cliPersonaNaturals.get(i).getNombre()+";"
@@ -82,5 +93,16 @@ public class CrudNatural {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static boolean existeId(String id){
+        boolean existe = false;
+        ArrayList<PersonaNatural> listaClientesNaturales= leerClienteNatu();
+        for (int i = 0; i < listaClientesNaturales.size()&&!existe; i++) {
+            if (id.equals(listaClientesNaturales.get(i).getIdentificacion())){
+                existe=true;
+            }
+        }
+        return existe;
     }
 }

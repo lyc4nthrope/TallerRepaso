@@ -28,29 +28,29 @@
          </rowConstraints>
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo" />
-            <TextField fx:id="textNombre" GridPane.columnIndex="1" />
+            <TextField fx:id="textCodigo" GridPane.columnIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" GridPane.rowIndex="1" />
-            <TextField fx:id="textApellido" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="textNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descripcion" GridPane.rowIndex="2" />
-            <TextField fx:id="textID" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="textDescripcion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valor Unidad" GridPane.rowIndex="3" />
-            <TextField fx:id="textDireccion" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="textValorU" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad Existencia" GridPane.rowIndex="4" />
-            <TextField fx:id="textTelefono" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="textCantidad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Vencimiento" GridPane.rowIndex="5" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="textFechaVencimiento" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Button layoutX="255.0" layoutY="311.0" mnemonicParsing="false" text="Añadir" />
       <Button layoutX="255.0" layoutY="343.0" mnemonicParsing="false" onAction="#switchScena1" text="Regresar" />
-      <TableView fx:id="listaJuridicos" layoutX="14.0" layoutY="14.0" prefHeight="263.0" prefWidth="495.0">
+      <TableView fx:id="tablaProductosPerecederos" layoutX="14.0" layoutY="14.0" prefHeight="263.0" prefWidth="495.0">
          <columns>
-            <TableColumn fx:id="jurNombre" prefWidth="75.0" text="Codigo" />
-            <TableColumn fx:id="jurApellido" prefWidth="75.0" text="Nombre" />
-            <TableColumn fx:id="jurID" prefWidth="75.0" text="Descripcion" />
-            <TableColumn fx:id="jurDireccion" prefWidth="75.0" text="Valor U" />
-            <TableColumn fx:id="jurTelefono" prefWidth="75.0" text="Cantidad" />
-            <TableColumn fx:id="jurNit" prefWidth="122.0" text="Fecha Vencimiento" />
+            <TableColumn fx:id="jurCodigo" prefWidth="75.0" text="Codigo" />
+            <TableColumn fx:id="jurNombre" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="jurDescripcion" prefWidth="75.0" text="Descripcion" />
+            <TableColumn fx:id="jurValorU" prefWidth="75.0" text="Valor U" />
+            <TableColumn fx:id="jurCantidad" prefWidth="75.0" text="Cantidad" />
+            <TableColumn fx:id="jurFechaVencimiento" prefWidth="122.0" text="Fecha Vencimiento" />
          </columns>
       </TableView>
    </children>
