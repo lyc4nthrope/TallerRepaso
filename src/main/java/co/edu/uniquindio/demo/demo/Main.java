@@ -11,24 +11,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage)throws IOException{
-            /*Parent root = FXMLLoader.load(getClass().getResource("Scena1.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setScene(scene);
-            stage.show();
-            */
-            //Scene scene = new Scene(fxmlLoader.load());
-
            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Scena1.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
+            stage.setScene(scene);
             stage.show();
-        /*Parent root = FXMLLoader.load(getClass().getResource("Scena1.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        */
-
     }
 
 

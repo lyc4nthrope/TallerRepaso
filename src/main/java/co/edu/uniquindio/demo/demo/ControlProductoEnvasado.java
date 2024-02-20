@@ -161,7 +161,7 @@ public class ControlProductoEnvasado implements Initializable {
         boolean hayAlgo=false;
         if (!txtNombre.getText().isEmpty()&&!textCodigo.getText().isEmpty()&&!textDescripcion.getText().isEmpty()
                 &&!textValorUnidad.getText().isEmpty()&&!textPesoEnvase.getText().isEmpty()&&!textCantExistencias.getText().isEmpty()
-        && !(txtFechaEnvasado.getChronology()==null)&&!comboxPais.getValue().isEmpty()){
+        && !(txtFechaEnvasado.getChronology()==null)&&!(comboxPais.getValue()==null)){
             hayAlgo=true;
         }
         return hayAlgo;
