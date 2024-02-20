@@ -135,7 +135,6 @@ public class ControlProductoEnvasado implements Initializable {
             alert.setContentText("Ingreso de datos invalido(s)");
             alert.showAndWait();
         }
-
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
