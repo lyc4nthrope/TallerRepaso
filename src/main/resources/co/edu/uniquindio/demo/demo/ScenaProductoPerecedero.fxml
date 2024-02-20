@@ -42,7 +42,7 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad Existencia" GridPane.rowIndex="4" />
             <TextField fx:id="textCantidad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Vencimiento" GridPane.rowIndex="5" />
-            <DatePicker fx:id="textFechaVencimiento" prefHeight="25.0" prefWidth="193.0" promptText="Ingrese fecha" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="textFechaVencimiento" editable="false" prefHeight="25.0" prefWidth="193.0" promptText="Ingrese fecha" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Button fx:id="bntagregarproductoperecedero" layoutX="379.0" layoutY="305.0" mnemonicParsing="false" onAction="#agregarProductoPerecedero" prefHeight="25.0" prefWidth="115.0" text="Añadir" />

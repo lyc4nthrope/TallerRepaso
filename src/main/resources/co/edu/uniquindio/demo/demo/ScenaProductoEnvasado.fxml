@@ -57,7 +57,7 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad Existencia" GridPane.rowIndex="4" />
             <TextField fx:id="textCantExistencias" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Envasado" GridPane.rowIndex="5" />
-            <DatePicker fx:id="txtFechaEnvasado" prefHeight="25.0" prefWidth="193.0" promptText="Ingrese Fecha" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="txtFechaEnvasado" editable="false" prefHeight="25.0" prefWidth="193.0" promptText="Ingrese Fecha" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Peso Envase" GridPane.rowIndex="6" />
             <TextField fx:id="textPesoEnvase" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pais Origen" GridPane.rowIndex="7" />
